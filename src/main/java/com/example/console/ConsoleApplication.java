@@ -33,13 +33,26 @@ public class ConsoleApplication implements CommandLineRunner {
         list.setHead(head);
         list.iterate(myconsumer);
 
+        System.out.println("BST preorder");
         BST<Integer> bst = new BST<>(5);
         BST<Integer>.TreeNode<Integer> root = bst.getRoot();
         bst.add(root, 4);
         bst.add(root, 2);
         bst.add(root, 3);
         bst.add(root, 1);
+        bst.add(root, 6);
 
+        bst.preorder(root);
+        System.out.println("non-recursive ");
+        bst.preorderNonRec(root);
+        System.out.println("BST inorder");
+        bst.inorder(root);
+        System.out.println("BST preorder Non recursive");
+        bst.inorderNonRec(root);
+        System.out.println("BST postorder");
+        bst.postorder(root);
+        System.out.println("BST postorder Non recursive");
+        bst.postorderNonRec(root);
         System.out.println("end..."); ;
         System.exit(0);
     }
