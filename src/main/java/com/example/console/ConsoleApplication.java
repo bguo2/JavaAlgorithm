@@ -16,6 +16,16 @@ public class ConsoleApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        String str1= new String("ABCD");
+        String str2= new String("ABCD");
+        String str3 = str1;
+        if(str1 == str2)
+            System.out.println("object equal");
+        if(str1 == str3)
+            System.out.println("object equal: str1, str3");
+        if(str1.equals(str2))
+            System.out.println("value is equal");
+
         ListImpl<Integer> list = new ListImpl<Integer>();
         list.add(1);
         list.add(2);

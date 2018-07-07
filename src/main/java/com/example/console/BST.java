@@ -2,7 +2,7 @@ package com.example.console;
 
 import java.util.Stack;
 
-public class BST<T extends Comparable<? super T>>  {
+public class BST<T extends Comparable<? super T>> implements Iterable<T> {
     private TreeNode<T> root;
 
     public BST(T value){
