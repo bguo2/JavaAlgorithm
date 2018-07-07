@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.swing.plaf.synth.SynthEditorPaneUI;
+import java.util.Iterator;
 import java.util.function.Consumer;
 
 @SpringBootApplication
@@ -55,14 +56,44 @@ public class ConsoleApplication implements CommandLineRunner {
         bst.preorder(root);
         System.out.println("non-recursive ");
         bst.preorderNonRec(root);
+
+        //preorder iterator
+        System.out.println("preorder interator ");
+        bst.setIterationType(0);
+        Iterator<Integer> iterator = bst.iterator();
+        while (iterator.hasNext()){
+            Integer data = iterator.next();
+            System.out.println(data);
+        }
+
         System.out.println("BST inorder");
         bst.inorder(root);
-        System.out.println("BST preorder Non recursive");
+        System.out.println("BST ineorder Non recursive");
         bst.inorderNonRec(root);
+
+        //iterator
+        System.out.println("BST inorder iterator");
+        bst.setIterationType(1);
+        iterator = bst.iterator();
+        while (iterator.hasNext()){
+            Integer data = iterator.next();
+            System.out.println(data);
+        }
+
         System.out.println("BST postorder");
         bst.postorder(root);
         System.out.println("BST postorder Non recursive");
         bst.postorderNonRec(root);
+
+        //iterator
+        System.out.println("BST Postorder iterator");
+        bst.setIterationType(2);
+        iterator = bst.iterator();
+        while (iterator.hasNext()){
+            Integer data = iterator.next();
+            System.out.println(data);
+        }
+        
         System.out.println("end..."); ;
         System.exit(0);
     }

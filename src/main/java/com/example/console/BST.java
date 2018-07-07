@@ -1,9 +1,13 @@
 package com.example.console;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.Iterator;
 import java.util.Stack;
 
 public class BST<T extends Comparable<? super T>> implements Iterable<T> {
     private TreeNode<T> root;
+    private int iterationType = 0;
 
     public BST(T value){
         root = new TreeNode<>(value);
@@ -142,6 +146,132 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
                 if(tmp.left != null)
                     stack.push(tmp.left);
             }
+        }
+    }
+
+    //Iterator implementation
+    public void setIterationType(int type) {
+        iterationType = type;
+    }
+
+    public Iterator<T> iterator() {
+        switch (iterationType)
+        {
+            case 1: return new BSTInorderIterator();
+            case 2: return new BSTPostorderIterator();
+            default: return new BSTPreorderIterator();
+        }
+    }
+
+    private class BSTPreorderIterator implements Iterator<T> {
+        private TreeNode<T> current = root;
+        private Stack<TreeNode<T>> stack = new Stack<>();
+
+        public BSTPreorderIterator(){
+            if(root != null)
+                stack.push(root);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.empty();
+        }
+
+        @Override
+        public T next() {
+            current = stack.pop();
+            if(current.right != null){
+                stack.push(current.right);
+            }
+            if(current.left != null) {
+                stack.push(current.left);
+            }
+            return current.data;
+        }
+
+        // not implemented
+        @Override
+        public void remove(){
+            throw new NotImplementedException();
+        }
+    }
+
+    private class BSTInorderIterator implements Iterator<T> {
+        private TreeNode<T> current = root;
+        private Stack<TreeNode<T>> stack = new Stack<>();
+
+        public BSTInorderIterator(){
+        }
+
+        @Override
+        public boolean hasNext() {
+            return (current != null || !stack.empty());
+        }
+
+        @Override
+        public T next() {
+            TreeNode<T> tmp;
+            while (current != null || !stack.empty()){
+                if(current != null){
+                    stack.push(current);
+                    current = current.left;
+                }
+                else{
+                    tmp = stack.pop();
+                    current = tmp.right;
+                    return tmp.data;
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            throw new NotImplementedException();
+        }
+    }
+
+    private class BSTPostorderIterator implements Iterator<T> {
+        private Stack<TreeNode<T>> stack = new Stack<>();
+        private TreeNode<T> popNode = root;
+
+        public BSTPostorderIterator(){
+            if(root != null)
+                stack.push(root);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.empty();
+        }
+
+        @Override
+        public T next() {
+
+            while (!stack.empty()){
+                TreeNode<T> node = stack.peek();
+                boolean isLeaf = (node.left == null && node.right == null);
+                boolean finishedSubtree = (node.left == popNode || node.right == popNode);
+                if(isLeaf || finishedSubtree){
+                    //pop
+                    popNode = stack.pop();
+                    return popNode.data;
+                }
+                else{
+                    if(node.right != null)
+                        stack.push(node.right);
+                    if(node.left != null)
+                        stack.push(node.left);
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            throw new NotImplementedException();
         }
     }
 }
