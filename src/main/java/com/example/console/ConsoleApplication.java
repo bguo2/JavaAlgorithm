@@ -94,6 +94,10 @@ public class ConsoleApplication implements CommandLineRunner {
             System.out.println(data);
         }
 
+        int result = Reverse.reverseNumber(-1234, 0);
+        System.out.println("1234 => " + result);
+        result = Reverse.reverseNumber(-1234);
+        String tmp = Reverse.reverseString("12345");
         System.out.println("end..."); ;
         System.exit(0);
     }
