@@ -93,7 +93,7 @@ public class ConsoleApplication implements CommandLineRunner {
             Integer data = iterator.next();
             System.out.println(data);
         }
-        
+
         System.out.println("end..."); ;
         System.exit(0);
     }
