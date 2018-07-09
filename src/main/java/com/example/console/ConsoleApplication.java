@@ -98,6 +98,8 @@ public class ConsoleApplication implements CommandLineRunner {
         System.out.println("1234 => " + result);
         result = Reverse.reverseNumber(-1234);
         String tmp = Reverse.reverseString("12345");
+
+        boolean match = StringPattern.isMatch("*aa", "aaa");
         System.out.println("end..."); ;
         System.exit(0);
     }
