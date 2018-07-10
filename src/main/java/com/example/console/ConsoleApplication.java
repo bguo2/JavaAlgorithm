@@ -100,7 +100,11 @@ public class ConsoleApplication implements CommandLineRunner {
         String tmp = Reverse.reverseString("12345");
 
         boolean match = StringPattern.isMatch("*aa", "aaa");
-        System.out.println("end..."); ;
+
+        int[] arr = {2,5,7,9};
+        int index = BinarySearch.Search(arr, 11);
+
+        index = BinarySearch.Search(arr, 11, 0, arr.length);
         System.exit(0);
     }
 }
