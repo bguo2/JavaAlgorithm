@@ -101,7 +101,7 @@ public class ConsoleApplication implements CommandLineRunner {
 
         boolean match = StringPattern.isMatch("*aa", "aaa");
 
-        int[] arr = {2,5,7,9};
+        int[] arr = {20};
         int index = BinarySearch.Search(arr, 11);
 
         index = BinarySearch.Search(arr, 11, 0, arr.length);
