@@ -18,14 +18,7 @@ public class ConsoleApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         String str1= new String("ABCD");
-        String str2= new String("ABCD");
-        String str3 = str1;
-        if(str1 == str2)
-            System.out.println("object equal");
-        if(str1 == str3)
-            System.out.println("object equal: str1, str3");
-        if(str1.equals(str2))
-            System.out.println("value is equal");
+        String test = str1.substring(1,1);
 
         ListImpl<Integer> list = new ListImpl<Integer>();
         list.add(1);
@@ -100,6 +93,8 @@ public class ConsoleApplication implements CommandLineRunner {
         String tmp = Reverse.reverseString("12345");
 
         boolean match = StringPattern.isMatch("*aa", "aaa");
+
+        int[] result2 = MaxSlideWindow.maxSlidingWindow(new int[] {4,2,5,3,7,9}, 3);
         System.out.println("end..."); ;
         System.exit(0);
     }
