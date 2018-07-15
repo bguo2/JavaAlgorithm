@@ -96,6 +96,11 @@ public class ConsoleApplication implements CommandLineRunner {
 
         int[] result2 = MaxSlideWindow.maxSlidingWindow(new int[] {4,2,5,3,7,9}, 3);
         System.out.println("end..."); ;
+
+        int[] arr = {20};
+        int index = BinarySearch.Search(arr, 11);
+
+        index = BinarySearch.Search(arr, 11, 0, arr.length);
         System.exit(0);
     }
 }
