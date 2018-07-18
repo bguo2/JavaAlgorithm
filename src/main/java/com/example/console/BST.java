@@ -1,5 +1,6 @@
 package com.example.console;
 
+import apple.laf.JRSUIUtils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Iterator;
@@ -9,7 +10,7 @@ public class BST<T extends Comparable<? super   T>> implements Iterable<T> {
     private TreeNode<T> root;
     private int iterationType = 0;
 
-    public BST(T value){
+    public BST(T value) {
         root = new TreeNode<>(value);
     }
 
@@ -68,6 +69,38 @@ public class BST<T extends Comparable<? super   T>> implements Iterable<T> {
             else
                 add(root.right, value);
         }
+    }
+
+    public T minimum(TreeNode<T> root) {
+        if(root == null)
+            return null;
+        if(root.left == null)
+            return root.data;
+        return minimum(root.left);
+    }
+
+    public TreeNode<T> deleteNode(TreeNode<T> node, T value) {
+        if(node == null)
+            return null;
+        //go right
+        if(node.data.compareTo(value) < 0) {
+            node.right = deleteNode(node.right, value);
+        }
+        //go left
+        else if(node.data.compareTo(value) > 0) {
+            node.left = deleteNode(node.left, value);
+        }
+        else{
+            if(node.left == null)
+                return node.right;
+            if(node.right == null)
+                return node.left;
+            T min = minimum(node.right);
+            node.data = min;
+            node.right = deleteNode(node.right, min);
+        }
+
+        return node;
     }
 
     public void preorder(TreeNode<T> node) {

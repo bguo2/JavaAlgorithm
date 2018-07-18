@@ -87,6 +87,18 @@ public class ConsoleApplication implements CommandLineRunner {
             System.out.println(data);
         }
 
+        System.out.println("BST delete 1");
+        bst.deleteNode(bst.getRoot(), 1);
+        bst.inorder(bst.getRoot());
+        System.out.println("BST delete 2");
+        bst.add(bst.getRoot(), 1);
+        bst.deleteNode(bst.getRoot(), 2);
+        bst.inorder(bst.getRoot());
+        System.out.println("BST delete 5");
+        bst.add(bst.getRoot(), 2);
+        bst.deleteNode(bst.getRoot(), 5);
+        bst.inorder(bst.getRoot());
+
         int result = Reverse.reverseNumber(-1234, 0);
         System.out.println("1234 => " + result);
         result = Reverse.reverseNumber(-1234);
