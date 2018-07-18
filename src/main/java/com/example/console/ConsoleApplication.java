@@ -101,6 +101,25 @@ public class ConsoleApplication implements CommandLineRunner {
         int index = BinarySearch.Search(arr, 11);
 
         index = BinarySearch.Search(arr, 11, 0, arr.length);
+
+        System.out.println("myQueue test.");
+        MyQueue<Integer> queue = new MyQueue<>();
+        queue.enqueue1(3);
+        queue.enqueue1(4);
+        queue.enqueue1(5);
+        queue.enqueue1(6);
+        while (!queue.isEmpty()){
+            System.out.println(queue.dequeue1());
+        }
+
+        System.out.println("myStack test.");
+        MyStack<Integer> stack = new MyStack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        while (!stack.isEmpty()){
+            System.out.println(stack.pop());
+        }
         System.exit(0);
     }
 }
