@@ -12,6 +12,7 @@ public class ListImpl<T> {
         private Node(T value) {
             data = value;
         }
+        public Node() {}
     }
 
     public Node<T> getHead() {
@@ -88,5 +89,47 @@ public class ListImpl<T> {
         node.next.next = node;
         node.next = null;
         return tmp;
+    }
+
+    public void reverse(int startIndex, int endIndex) {
+        if(endIndex <= startIndex || endIndex - startIndex < 1)
+            return;
+        int count = 0;
+        Node<T> cur = head, start = null, end = null, last = head, preStart = null, afterEnd = null;
+        //find the start node and end node: the previous
+        while (cur != null) {
+            count++;
+            if(count == startIndex) {
+                start = cur;
+                preStart = last;
+            }
+            else if(count == endIndex) {
+                end = cur;
+                afterEnd = end.next;
+                break;
+            }
+            last = cur;
+            cur = cur.next;
+        }
+
+        if(start == null)
+            return;
+
+        if(end == null) {
+            end = last;
+        }
+
+        //terminate the link
+        if(end != null)
+            end.next = null;
+
+        Node<T> newHead = reverse(start);
+
+        //relink preStart and afterEnd
+        preStart.next = newHead;
+        start.next = afterEnd;
+
+        if(start == head)
+            head = newHead;
     }
 }

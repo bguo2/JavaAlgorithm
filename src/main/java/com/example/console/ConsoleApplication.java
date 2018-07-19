@@ -25,7 +25,7 @@ public class ConsoleApplication implements CommandLineRunner {
         list.add(2);
         list.add(3);
         list.add(4);
-        list.remove(4);
+        list.add(5);
         list.reverse();
 
         Consumer<Integer> myconsumer = i -> {
@@ -35,6 +35,10 @@ public class ConsoleApplication implements CommandLineRunner {
         ListImpl<Integer>.Node<Integer> head = list.getHead();
         head = list.reverse(head);
         list.setHead(head);
+        list.iterate(myconsumer);
+
+        System.out.println("reverse in the middle");
+        list.reverse(3, 7);
         list.iterate(myconsumer);
 
         System.out.println("BST preorder");
