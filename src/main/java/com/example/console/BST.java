@@ -1,6 +1,5 @@
 package com.example.console;
 
-import apple.laf.JRSUIUtils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Iterator;

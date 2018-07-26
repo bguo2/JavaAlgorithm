@@ -136,6 +136,7 @@ public class ConsoleApplication implements CommandLineRunner {
         while (!stack.isEmpty()){
             System.out.println(stack.pop());
         }
-        System.exit(0);
+
+        //System.exit(0);
     }
 }
