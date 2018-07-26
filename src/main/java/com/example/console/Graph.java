@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
+// undirected graph
 public class Graph {
     private int vertex;
     private ArrayList<Integer> edges[];
@@ -37,15 +38,15 @@ public class Graph {
     private boolean isCyclic(int v, boolean[] visited, int parent){
 
         visited[v] = true;
-        Iterator<Integer> it = edges[v].iterator();
-        while (it.hasNext()){
-            Integer next = it.next();
-            if(!visited[next]){
-                if(isCyclic(next, visited, v))
+
+        for(Integer c : edges[v]){
+
+            if(!visited[c]){
+                if(isCyclic(c, visited, v))
                     return true;
             }
             //If an adjacent is visited and not parent of current vertex, then there is a cycle.
-            else if(next != parent)
+            else if(c != parent)
                 return true;
         }
 

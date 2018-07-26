@@ -13,7 +13,7 @@ import static junit.framework.TestCase.assertTrue;
 public class ConsoleApplicationTests {
 
     @Test
-    public void contextLoads() {
+    public void undirectedGraphTest() {
         Graph g = new Graph(3);
         g.addEdge(0, 1);
         g.addEdge(0, 2);
@@ -38,4 +38,26 @@ public class ConsoleApplicationTests {
         assertTrue(isCyclic);
     }
 
+    @Test
+    public void directedGraphTest() {
+        DirectedGraph g = new DirectedGraph(5);
+        g.addEdge(0, 1);
+        g.addEdge(0, 2);
+        g.addEdge(0, 3);
+        g.addEdge(2,4);
+        g.addEdge(3,4);
+        boolean isCyclic = g.isCyclic();
+        System.out.println("Directed graph is cyclic: "+ isCyclic);
+        assertFalse(isCyclic);
+
+        g.addEdge(4,1);
+        isCyclic = g.isCyclic();
+        System.out.println("Directed graph after add 4=>1 is cyclic: "+ isCyclic);
+        assertFalse(isCyclic);
+
+        g.addEdge(4,0);
+        isCyclic = g.isCyclic();
+        System.out.println("Directed graph after add 4=>0 is cyclic: "+ isCyclic);
+        assertTrue(isCyclic);
+    }
 }
