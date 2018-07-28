@@ -60,4 +60,41 @@ public class ConsoleApplicationTests {
         System.out.println("Directed graph after add 4=>0 is cyclic: "+ isCyclic);
         assertTrue(isCyclic);
     }
+
+    @Test
+    public void quickSelectTest() {
+
+        QuickSelect test = new QuickSelect();
+        int result = test.findKthNumber(2, new int[] {});
+        assertTrue(result == -1);
+        result = test.findKthNumber(2, new int[] {5});
+        assertTrue(result == -1);
+        result = test.findKthNumber(1, new int[] {5});
+        assertTrue(result == 5);
+        result = test.findKthNumber(1, new int[] {9, 3});
+        assertTrue(result == 3);
+        result = test.findKthNumber(3, new int[] {9, 3, 8, 7, 1});
+        assertTrue(result == 7);
+        result = test.findKthNumber(3, new int[] {9, -3, 8, 7, -1, 10, 5});
+        assertTrue(result == 5);
+        result = test.findKthNumber(3, new int[] {9, -3, 8, 7, -1, 10, 5});
+        assertTrue(result == 5);
+        result = test.findKthNumber(3, new int[] {-1, -3, 5, 7, 8, 9, 10});
+        assertTrue(result == 5);
+        result = test.findKthNumber(3, new int[] {10, 8, 7, 5, -1, -4, -5});
+        assertTrue(result == -1);
+
+        //return array
+        int[] result1 = test.findKSmallestNumber(3, new int[] {9, -3, 8, 7, -1, 10, 5});
+        assertTrue(result1 != null && result1.length == 3 &&
+            result1[0] == -3 && result1[1] == -1 && result1[2] == 5);
+
+        result1 = test.findKSmallestNumber(3, new int[] {-3, -1, 5, 7, 8, 9, 10});
+        assertTrue(result1 != null && result1.length == 3 &&
+                result1[0] == -3 && result1[1] == -1 && result1[2] == 5);
+
+        result1 = test.findKSmallestNumber(3, new int[] {10, 8, 7, 5, -1, -4, -5});
+        assertTrue(result1 != null && result1.length == 3 &&
+                result1[0] == -5 && result1[1] == -4 && result1[2] == -1);
+    }
 }
