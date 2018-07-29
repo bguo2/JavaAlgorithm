@@ -97,4 +97,58 @@ public class ConsoleApplicationTests {
         assertTrue(result1 != null && result1.length == 3 &&
                 result1[0] == -5 && result1[1] == -4 && result1[2] == -1);
     }
+
+    @Test
+    public void quickSortTest() {
+        QuickSort test = new QuickSort();
+        int[] result = test.quickSort(new int[] {5});
+        assertTrue(result != null && result.length == 1);
+
+        result = test.quickSort(new int[] {9, 3, 8, 7, 1});
+        assertTrue(result.length == 5 && result[0] == 1 && result[1] == 3 && result[2] == 7 &&
+        result[3] == 8 && result[4] == 9);
+
+        result = test.quickSort(new int[] {1, 3, 7, 8, 9});
+        assertTrue(result.length == 5 && result[0] == 1 && result[1] == 3 && result[2] == 7 &&
+                result[3] == 8 && result[4] == 9);
+
+        result = test.quickSort(new int[] {9, 8, 7, 3, 1});
+        assertTrue(result.length == 5 && result[0] == 1 && result[1] == 3 && result[2] == 7 &&
+                result[3] == 8 && result[4] == 9);
+    }
+
+    @Test
+    public void SortedKArraysTest() {
+        MergeKSortedArray m = new MergeKSortedArray();
+        int[] result = m.merge(null);
+        assertTrue(result == null);
+
+        result = m.merge(new int[][] {{3, 5, 7, 8}});
+        assertTrue(result != null && result.length == 4 && result[0] == 3 && result[3] == 8);
+
+        result = m.merge(new int[][] {{3, 5, 7, 8}, {4, 6, 12, 15}});
+        assertTrue(result != null && result.length == 8 && result[0] == 3 && result[1] == 4
+                && result[2] == 5 && result[3] == 6 && result[4] == 7 && result[5] == 8 && result[6] == 12 && result[7] == 15);
+
+    }
+
+    @Test
+    public void FindKSmallestTest() {
+        FindKSmallest obj = new FindKSmallest();
+        int[] result = obj.find(null, 8);
+        assertTrue(result == null);
+
+        result = obj.find(new int[] {8}, 8);
+        assertTrue(result != null && result.length == 1 && result[0] == 8);
+
+        result = obj.find(new int[] { -5, 7, 0, -6, 15, 3}, 2);
+        assertTrue(result != null && result.length == 2 && result[0] == -6 && result[1] == -5);
+
+        result = obj.find(new int[] { -5, 7, 0}, 4);
+        assertTrue(result != null && result.length == 3 && result[0] == -5 && result[1] == 0 && result[2] == 7);
+
+        result = obj.find(new int[] { -5, 7, 0, -6, 15, 3}, 3);
+        assertTrue(result != null && result.length == 3 && result[0] == -6 && result[1] == -5 && result[2] == 0);
+
+    }
 }

@@ -2,6 +2,7 @@ package com.example.console;
 
 public class BinarySearch {
 
+    //find the target value in the sorted array, if it is not found, return the index where it should be inserted
     public static int Search(int[] input, int target) {
         if(input == null || input.length == 0)
             return 0;
@@ -21,6 +22,7 @@ public class BinarySearch {
         return start;
     }
 
+    //search target value in the sorted array
     public static int Search(int[] input, int target, int start, int end){
         if(input == null || input.length == 0)
             return 0;
