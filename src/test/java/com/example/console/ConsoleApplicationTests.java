@@ -151,4 +151,19 @@ public class ConsoleApplicationTests {
         assertTrue(result != null && result.length == 3 && result[0] == -6 && result[1] == -5 && result[2] == 0);
 
     }
+
+    @Test
+    public void MathTest() {
+        try
+        {
+            assertTrue(Maths.squrt(1) == 1);
+            assertTrue(Maths.squrt(2) == 1);
+            assertTrue(Maths.squrt(4) == 2);
+            assertTrue(Maths.squrt(9) == 3);
+            assertTrue(Maths.squrt(8) == 2);
+        }
+        catch (Exception e){
+
+        }
+    }
 }
