@@ -229,33 +229,32 @@ public class BST<T extends Comparable<? super   T>> implements Iterable<T> {
     }
 
     private class BSTInorderIterator implements Iterator<T> {
-        private TreeNode<T> current = root;
         private Stack<TreeNode<T>> stack = new Stack<>();
 
         public BSTInorderIterator(){
+            TreeNode<T> current = root;
+            while(current != null){
+                stack.push(current);
+                current = current.left;
+            }
         }
 
         @Override
         public boolean hasNext() {
-            return (current != null || !stack.empty());
+            return !stack.empty();
         }
 
         @Override
         public T next() {
-            TreeNode<T> tmp;
-            while (current != null || !stack.empty()){
-                if(current != null){
+            TreeNode<T> node = stack.pop();
+            if(node.right != null) {
+                TreeNode<T> current = node.right;
+                while (current != null){
                     stack.push(current);
                     current = current.left;
                 }
-                else{
-                    tmp = stack.pop();
-                    current = tmp.right;
-                    return tmp.data;
-                }
             }
-
-            return null;
+            return node.data;
         }
 
         @Override

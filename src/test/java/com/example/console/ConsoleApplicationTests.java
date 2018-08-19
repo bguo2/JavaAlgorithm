@@ -166,4 +166,10 @@ public class ConsoleApplicationTests {
 
         }
     }
+
+    @Test
+    public void MaxSlidingWindowTest(){
+        int[] nums = { 4,2,5,3,7,9 };
+        Integer[] result = MaxSlidingWindow.maxSlindingWindow(nums, 4);
+    }
 }
