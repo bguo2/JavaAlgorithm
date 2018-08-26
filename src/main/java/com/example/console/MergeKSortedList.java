@@ -10,8 +10,8 @@ interface SortedListIterator<E> extends Iterator<E> {
     boolean hasNext();
 }
 
-public class MergeKSortedList<E extends Comparable<E>> {
-    private class IteratorContainer<E extends Comparable<E>> implements Comparable<IteratorContainer<E>> {
+public class MergeKSortedList<E extends Comparable<? super E>> {
+    private class IteratorContainer<E extends Comparable<? super E>> implements Comparable<IteratorContainer<E>> {
         private SortedListIterator<E> iterator;
         private E value;
 
