@@ -5,6 +5,10 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
@@ -171,5 +175,28 @@ public class ConsoleApplicationTests {
     public void MaxSlidingWindowTest(){
         int[] nums = { 4,2,5,3,7,9 };
         Integer[] result = MaxSlidingWindow.maxSlindingWindow(nums, 4);
+    }
+
+    @Test
+    public void MergeKSortedListTest() {
+        MergeKSortedList<Integer> merge = new MergeKSortedList<Integer>();
+        MergeKSortedList<Integer>.ResultWrapper<Integer> in1 = merge.new ResultWrapper<Integer>();
+        in1.add(3);
+        in1.add(7);
+        in1.add(9);
+        in1.add(11);
+
+        MergeKSortedList<Integer>.ResultWrapper<Integer> in2 = merge.new ResultWrapper<Integer>();
+        in2.add(6);
+        in2.add(13);
+
+        List<SortedListIterator<Integer>> list = new ArrayList<>();
+        list.add(in1);
+        list.add(in2);
+
+        SortedListIterator<Integer> iterator = merge.mergeSortedList(list);
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
     }
 }
