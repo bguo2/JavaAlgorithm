@@ -1,5 +1,6 @@
 package com.example.console;
 
+import javafx.util.Pair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -197,6 +198,20 @@ public class ConsoleApplicationTests {
         SortedListIterator<Integer> iterator = merge.mergeSortedList(list);
         while (iterator.hasNext()){
             System.out.println(iterator.next());
+        }
+    }
+
+    @Test
+    public void SmallestPairTest() {
+        int[] arr1 = {1, 3, 11};
+        int[] arr2 = {2, 4, 8};
+
+        List<Pair<Integer, Integer>> result = KSmallestPairs.getSmallestPairs(arr1, arr2, 4);
+        Iterator<Pair<Integer, Integer>> iterator = result.iterator();
+        while (iterator.hasNext())
+        {
+            Pair<Integer, Integer> pair = iterator.next();
+            System.out.println("(" + pair.getKey() + "," + pair.getValue() + ")");
         }
     }
 }
