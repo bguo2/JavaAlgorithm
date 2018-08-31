@@ -1,5 +1,6 @@
 package com.example.console;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,5 +25,38 @@ public class ConsoleAppTest1 {
         while(iterator.hasNext()){
             ArrayList<Integer> list = iterator.next();
         }
+    }
+
+    @Test
+    public void balancedParenthesisTest() {
+        String result = BalancedParenthesis.getBalancedString(null);
+        assertTrue(result == null);
+
+        result = BalancedParenthesis.getBalancedString("");
+        assertTrue(result.length() == 0);
+
+        result = BalancedParenthesis.getBalancedString("(");
+        assertTrue(result.length() == 0);
+
+        result = BalancedParenthesis.getBalancedString(")");
+        assertTrue(result.length() == 0);
+
+        result = BalancedParenthesis.getBalancedString("()");
+        assertTrue(result.equals("()"));
+
+        result = BalancedParenthesis.getBalancedString("a(bc(ds)");
+        assertTrue(result.equals("abc(ds)"));
+
+        result = BalancedParenthesis.getBalancedString("a(bc(ds)))");
+        assertTrue(result.equals("a(bc(ds))"));
+
+        result = BalancedParenthesis.getBalancedString("((())");
+        assertTrue(result.equals("(())"));
+        result = BalancedParenthesis.getBalancedString("((()fd)fd))))");
+        assertTrue(result.equals("((()fd)fd)"));
+        result = BalancedParenthesis.getBalancedString("((()fd)fd))((((");
+        assertTrue(result.equals("((()fd)fd)"));
+        result = BalancedParenthesis.getBalancedString("((()fd)fd))))(())");
+        assertTrue(result.equals("((()fd)fd)(())"));
     }
 }
