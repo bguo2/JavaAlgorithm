@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 // undirected graph
-public class Graph {
+public class UndirectedGraph {
     private int vertex;
     private ArrayList<Integer> edges[];
 
-    public Graph(int n){
+    public UndirectedGraph(int n){
         vertex = n;
         edges = new ArrayList[n];
         for(int i = 0; i < n; i++){
@@ -39,18 +39,41 @@ public class Graph {
 
         visited[v] = true;
 
-        for(Integer c : edges[v]){
+        for(Integer edgeVertex : edges[v]){
 
-            if(!visited[c]){
-                if(isCyclic(c, visited, v))
+            if(!visited[edgeVertex]){
+                if(isCyclic(edgeVertex, visited, v))
                     return true;
             }
             //If an adjacent is visited and not parent of current vertex, then there is a cycle.
-            else if(c != parent)
+            else if(edgeVertex != parent)
                 return true;
         }
 
         return false;
     }
-
+    
+    public int getConnectedComponents()
+    {
+        boolean[] visited = new boolean[vertex];
+        Arrays.fill(visited, false);
+        
+        int count = 0;
+        for(int i = 0; i< this.vertex; i++){
+            if(!visited[i]) {
+                count++;
+                dfs(i, visited);
+            }
+        }
+        
+        return count;
+    }
+    
+    private void dfs(int vertex, boolean[] visit){
+        visit[vertex] = true;
+        for (Integer edgeVertex: this.edges[vertex]){
+            if(!visit[edgeVertex])
+                dfs(edgeVertex, visit);
+        }
+    }
 }
