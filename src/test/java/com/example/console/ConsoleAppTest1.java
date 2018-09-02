@@ -1,6 +1,5 @@
 package com.example.console;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -119,5 +118,17 @@ public class ConsoleAppTest1 {
         curNode.addNode(1, false);
 
         result = pathSum.getAllPathsSum(root, 22);
+    }
+
+    @Test
+    public void wellFormedParenthesisTest() {
+        List<String> result = WellFormedParenthesis.generateWellFormedParenthesis(0);
+        assertTrue(result == null);
+
+        result = WellFormedParenthesis.generateWellFormedParenthesis(1);
+        assertTrue(result != null && result.get(0).equals("()"));
+
+        result = WellFormedParenthesis.generateWellFormedParenthesis(2);
+        assertTrue(result != null && result.size() == 2 && result.contains("(())") && result.contains("()()"));
     }
 }
