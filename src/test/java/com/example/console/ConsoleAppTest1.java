@@ -96,4 +96,28 @@ public class ConsoleAppTest1 {
         positions = StringConcatenation.getStartingIndex("abcdababcd", new String[] {"ab", "ab"});
         assertTrue(positions.size() == 1 && positions.get(0) == 4);
     }
+
+    @Test
+    public void binaryTreePathSumTest(){
+        BinaryTreePathSum pathSum = new BinaryTreePathSum();
+        BinaryTreePathSum.TreeNode root = pathSum.new TreeNode(null, null, 5);
+        List<List<Integer>> result = pathSum.getAllPathsSum(null, 5);
+        assertTrue(result == null);
+
+        result = pathSum.getAllPathsSum(root, 5);
+        assertTrue(result.size() == 1 && result.get(0).get(0) == 5);
+
+        BinaryTreePathSum.TreeNode curNode = root.addNode(4, true);
+        curNode = curNode.addNode(11, true);
+        curNode.addNode(7, true);
+        curNode.addNode(2, false);
+
+        curNode = root.addNode(8, false);
+        curNode.addNode(13, true);
+        curNode = curNode.addNode(4, false);
+        curNode.addNode(5, true);
+        curNode.addNode(1, false);
+
+        result = pathSum.getAllPathsSum(root, 22);
+    }
 }
