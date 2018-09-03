@@ -131,4 +131,11 @@ public class ConsoleAppTest1 {
         result = WellFormedParenthesis.generateWellFormedParenthesis(2);
         assertTrue(result != null && result.size() == 2 && result.contains("(())") && result.contains("()()"));
     }
+
+    @Test
+    public void resotoreIPAddressTest(){
+
+        List<String> result = RestoreIPAddress.restoreIpAddresses("25525511135");
+
+    }
 }
