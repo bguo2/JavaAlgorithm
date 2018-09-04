@@ -138,4 +138,13 @@ public class ConsoleAppTest1 {
         List<String> result = RestoreIPAddress.restoreIpAddresses("25525511135");
 
     }
+
+    @Test
+    public void wordBreakTest() {
+
+        Set<String> set = new HashSet<>();
+        set.add("code");
+        set.add("leet");
+        Boolean result = WordBreak.wordBreak("leetcode", set);
+    }
 }
