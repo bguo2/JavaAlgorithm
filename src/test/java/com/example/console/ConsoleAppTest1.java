@@ -147,4 +147,13 @@ public class ConsoleAppTest1 {
         set.add("leet");
         Boolean result = WordBreak.wordBreak("leetcode", set);
     }
+
+    @Test
+    public void minimumHeightTree() {
+        int[][] edges = {{1,0}, {1,2}, {1,3}};
+        List<Integer> result = MinimumHeightTrees.findMinHeightTrees(4, edges);
+
+        int[][] edges1 = {{0,3},{1,3},{2,3}, {4,3}, {5,4}};
+        result = MinimumHeightTrees.findMinHeightTrees(6, edges1);
+    }
 }

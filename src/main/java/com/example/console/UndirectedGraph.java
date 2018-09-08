@@ -23,6 +23,7 @@ public class UndirectedGraph {
         edges[w].add(v);
     }
 
+    //is the graph cyclic
     public boolean isCyclic() {
         boolean[] visited = new boolean[vertex];
         Arrays.fill(visited, false);
@@ -52,7 +53,8 @@ public class UndirectedGraph {
 
         return false;
     }
-    
+
+    //get the count of connected components
     public int getConnectedComponents()
     {
         boolean[] visited = new boolean[vertex];
@@ -75,5 +77,23 @@ public class UndirectedGraph {
             if(!visit[edgeVertex])
                 dfs(edgeVertex, visit);
         }
+    }
+
+    //Is the graph a valid tree? can convert to check if it is cyclic
+    public boolean isGraphValidTree(){
+        boolean[] visited = new boolean[vertex];
+        Arrays.fill(visited, false);
+
+        if(isCyclic(0, visited, -1))
+            return false;
+
+        //still have unvisited vertices: disconnected components
+        for(boolean isVisited: visited)
+        {
+            if(!isVisited)
+                return false;
+        }
+
+        return true;
     }
 }
