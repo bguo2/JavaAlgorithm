@@ -1,5 +1,6 @@
 package com.example.console;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -155,5 +156,56 @@ public class ConsoleAppTest1 {
 
         int[][] edges1 = {{0,3},{1,3},{2,3}, {4,3}, {5,4}};
         result = MinimumHeightTrees.findMinHeightTrees(6, edges1);
+    }
+
+    @Test
+    public void minStepsTest() {
+        MinimumSteps minSteps = new MinimumSteps();
+        int[][] lots = {
+                {1,0,0},
+                {1,0,0},
+                {1,9,0}};
+
+        int steps = minSteps.minSteps(lots);
+        assertTrue(steps == 3);
+        steps = minSteps.LeeAlgorithm(lots);
+        assertTrue(steps == 3);
+
+        int[][] lots1 = {
+                {1,0,0},
+                {1,0,0},
+                {1,1,9}};
+        steps = minSteps.minSteps(lots1);
+        assertTrue(steps == 4);
+        steps = minSteps.LeeAlgorithm(lots1);
+        assertTrue(steps == 4);
+
+        int[][] lots2 = {
+                {1, 0, 1, 0},
+                {1, 1, 0, 1},
+                {1, 1, 1, 0},
+                {1, 1, 1, 9}
+        };
+        steps = minSteps.minSteps(lots2);
+        assertTrue(steps == 6);
+        steps = minSteps.LeeAlgorithm(lots2);
+        assertTrue(steps == 6);
+
+        int[][] mat = {
+                { 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
+                { 0, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+                { 0, 0, 1, 0, 1, 1, 1, 0, 0, 1 },
+                { 1, 0, 1, 1, 1, 0, 1, 1, 0, 1 },
+                { 0, 0, 0, 1, 0, 0, 0, 1, 0, 1 },
+                { 1, 0, 1, 1, 1, 0, 0, 1, 1, 0 },
+                { 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
+                { 0, 1, 1, 1, 1, 9, 1, 1, 0, 0 },
+                { 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
+                { 0, 0, 1, 0, 0, 1, 1, 0, 0, 1 },
+        };
+        steps = minSteps.minSteps(mat);
+        assertTrue(steps == 12);
+        steps = minSteps.LeeAlgorithm(mat);
+        assertTrue(steps == 12);
     }
 }
