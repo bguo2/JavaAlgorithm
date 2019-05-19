@@ -57,6 +57,15 @@ public class ConsoleAppTest1 {
         assertTrue(result.equals("((()fd)fd)"));
         result = BalancedParenthesis.getBalancedString("((()fd)fd))))(())");
         assertTrue(result.equals("((()fd)fd)(())"));
+
+        List<String> retList = BalancedParenthesis.getallbalancedParentthesis("((())");
+        assertTrue(retList.size() == 1 && retList.get(0).equals("(())"));
+
+        retList = BalancedParenthesis.getallbalancedParentthesis("(a)())()");
+        assertTrue(retList.size() == 2 && retList.contains("(a)()()") && retList.contains("(a())()"));
+
+        retList = BalancedParenthesis.getallbalancedParentthesis(")(");
+        assertTrue(retList.size() == 1 && retList.contains(""));
     }
 
     @Test

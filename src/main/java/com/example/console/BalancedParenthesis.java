@@ -1,7 +1,6 @@
 package com.example.console;
 
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 //input (aa(dss)(, output aa(dss): remove the unbalanced parenthesis
 public class BalancedParenthesis {
@@ -43,5 +42,60 @@ public class BalancedParenthesis {
         }
 
         return result.reverse().toString();
+    }
+
+    //Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
+    public static List<String> getallbalancedParentthesis(String input)
+    {
+        List<String> result = new ArrayList<>();
+        if(input == null || input.isEmpty())
+            return result;
+        HashSet<String> visited = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+        boolean found = false;
+
+        queue.offer(input);
+        while (!queue.isEmpty())
+        {
+            String s = queue.poll();
+            if(isValid(s))
+            {
+                result.add(s);
+                found = true;
+            }
+
+            if(found)
+                continue;
+
+            for(int i = 0; i < s.length(); i++)
+            {
+                // we only try to remove left or right paren
+                if (s.charAt(i) != '(' && s.charAt(i) != ')') continue;
+
+                String tmp = s.substring(0, i) + s.substring(i+1);
+                if(!visited.contains(tmp))
+                {
+                    visited.add(tmp);
+                    queue.offer(tmp);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    //helper function checks if string s contains valid parantheses
+    private static boolean isValid(String s)
+    {
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') count++;
+            else if (c == ')' && count-- == 0)
+                return false;
+        }
+
+        return count == 0;
     }
 }
