@@ -8,7 +8,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
 
-import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringRunner.class)

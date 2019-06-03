@@ -17,6 +17,8 @@ public class ConsoleApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+
         String str1= new String("ABCD");
         String test = str1.substring(1,1);
 
