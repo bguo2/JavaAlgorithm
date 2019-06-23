@@ -40,4 +40,32 @@ public class AppTest2 {
         int shortest = obj.getShortestDistance(matrix);
         assertTrue(shortest == 7);
     }
+
+    @Test
+    public void minWindowSubstringTest()
+    {
+        String S = "ADOBECODEBANC", T = "ABC";
+        String result = MinWindowSubstring.getMinWindowSubstring(S, T);
+        assertTrue(result.equals("BANC"));
+        S = "ADOABECODEBANC";
+        result = MinWindowSubstring.getMinWindowSubstring(S, T);
+        assertTrue(result.equals("ABEC"));
+        S = "ADOABECODEBANC";
+        T = "AABC";
+        result = MinWindowSubstring.getMinWindowSubstring(S, T);
+        assertTrue(result.equals("ADOABEC"));
+    }
+
+    @Test
+    public void minCostToMerge()
+    {
+        int cost = MinCostToMerge.getMinCost(new int[] {4, 7});
+        assertTrue(cost == 11);
+
+        cost = MinCostToMerge.getMinCost(new int[] {8, 4, 7});
+        assertTrue(cost == 30);
+
+        cost = MinCostToMerge.getMinCost(new int[] {4,3,2,6});
+        assertTrue(cost == 29);
+    }
 }
