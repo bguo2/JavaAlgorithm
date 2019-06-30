@@ -68,4 +68,26 @@ public class AppTest2 {
         cost = MinCostToMerge.getMinCost(new int[] {4,3,2,6});
         assertTrue(cost == 29);
     }
+
+    @Test
+    public void minLargeSumSubarrayTest() {
+        MinLargeSumSubArrays test = new MinLargeSumSubArrays();
+        int result = test.splitArray(new int[] {7, 2, 5, 10, 8}, 2);
+        assertTrue(result == 18);
+        result = test.splitArray(new int[] {7, 2, 5, 10, 1}, 2);
+        assertTrue(result == 14);
+    }
+
+    @Test
+    public void MinSubArrayWithGreaterThanValueTest()
+    {
+        int len = MinSubArrayWithGreaterThanValue.getMinSubArray(new int[] {1, 4, 45, 6, 0, 19}, 51);
+        assertTrue(len == 3);
+        len = MinSubArrayWithGreaterThanValue.getMinSubArray(new int[] {1, 10, 5, 2, 7}, 9);
+        assertTrue(len == 1);
+        len = MinSubArrayWithGreaterThanValue.getMinSubArray(new int[] {1, 11, 100, 1, 0, 200, 3, 2, 1, 250}, 280);
+        assertTrue(len == 4);
+        len = MinSubArrayWithGreaterThanValue.getMinSubArray(new int[] {1, 2, 4}, 4);
+        assertTrue(len == 0);
+    }
 }
