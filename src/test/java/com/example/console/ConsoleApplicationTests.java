@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -194,6 +195,10 @@ public class ConsoleApplicationTests {
         in1.add(9);
         in1.add(11);
 
+        while (in1.hasNext()) {
+            System.out.println(in1.next());
+        }
+
         MergeKSortedList<Integer>.ResultWrapper<Integer> in2 = merge.new ResultWrapper<Integer>();
         in2.add(6);
         in2.add(13);
@@ -210,8 +215,8 @@ public class ConsoleApplicationTests {
 
     @Test
     public void SmallestPairTest() {
-        int[] arr1 = {1, 3, 11};
-        int[] arr2 = {2, 4, 8};
+        int[] arr1 = {1, 7, 11};
+        int[] arr2 = {2, 4, 6};
 
         List<Pair<Integer, Integer>> result = KSmallestPairs.getSmallestPairs(arr1, arr2, 4);
         Iterator<Pair<Integer, Integer>> iterator = result.iterator();

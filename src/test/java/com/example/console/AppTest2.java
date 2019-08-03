@@ -5,6 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringRunner.class)
@@ -79,7 +82,7 @@ public class AppTest2 {
     }
 
     @Test
-    public void MinSubArrayWithGreaterThanValueTest()
+    public void minSubArrayWithGreaterThanValueTest()
     {
         int len = MinSubArrayWithGreaterThanValue.getMinSubArray(new int[] {1, 4, 45, 6, 0, 19}, 51);
         assertTrue(len == 3);
@@ -89,5 +92,32 @@ public class AppTest2 {
         assertTrue(len == 4);
         len = MinSubArrayWithGreaterThanValue.getMinSubArray(new int[] {1, 2, 4}, 4);
         assertTrue(len == 0);
+    }
+
+    @Test
+    //unweighed graph
+    public void shortestPathInGraph() {
+        ShortestPathGraph graph = new ShortestPathGraph(8);
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
+        graph.addEdge(0,3 );
+        graph.addEdge(3,7 );
+        graph.addEdge(3,4 );
+        graph.addEdge(4,7 );
+        graph.addEdge(6,7 );
+        graph.addEdge(4, 7);
+        graph.addEdge(4, 6);
+        graph.addEdge(4, 5);
+
+        List<Integer> path = new ArrayList<>();
+        int steps = graph.getShortestPath(0, 7, path);
+        assertTrue(steps ==2);
+        assertTrue(path.size() == 3 && path.get(0) == 0 && path.get(1) == 3 && path.get(2) == 7);
+
+        List<Integer> path1 = new ArrayList<>();
+        steps = graph.getShortestPath(2, 6, path1);
+        assertTrue(steps == 5);
+        assertTrue(path1.size() == 6 && path1.get(0) == 2 && path1.get(1) == 1 && path1.get(2) == 0 &&
+                path1.get(3) == 3 && (path1.get(4) == 4  || path1.get(4) == 7)&& path1.get(5) == 6);
     }
 }
