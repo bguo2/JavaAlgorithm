@@ -5,6 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringRunner.class)
@@ -33,5 +35,40 @@ public class AppTest3 {
 
         waitTime = test.getMinWaitTime(matrix1);
         assertTrue(waitTime == 16);
+    }
+
+    @Test
+    public void pacificAtlanticWaterFlowTest() {
+        int[][] matrix = {
+                {1, 2, 2, 3, 5},
+                {3, 2, 3, 4, 4},
+                {2, 4, 5, 3, 1},
+                {6, 7, 1, 4, 5},
+                {5, 1, 1, 2, 4}
+        };
+        PacificAtlanticWaterFlow pawf = new PacificAtlanticWaterFlow();
+        List<int[]> res = pawf.getResult(matrix);
+        assertTrue(res != null && res.size() == 7);
+    }
+
+    @Test
+    public void shortestGetAllKeysTest() {
+        int[][] matrix = {
+                {'@','.', 'a', '.', '#'},
+                {'#', '#', '#', '.', '#'},
+                {'b', '.', 'A', '.', 'B'}
+        };
+
+        ShortestPathGetAllKeys test = new ShortestPathGetAllKeys();
+        int step = test.shortestPaht(matrix);
+        assertTrue(step == 8);
+
+        int[][] matrix1 = {
+                {'@', '.', '.', 'a', 'A'},
+                {'.', '.', 'B', '#', '.'},
+                {'.', '.', '.', '.', 'b'}
+        };
+        step = test.shortestPaht(matrix1);
+        assertTrue(step == 6);
     }
 }
