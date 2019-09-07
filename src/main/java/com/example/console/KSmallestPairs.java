@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Find k pairs with smallest sums in two sorted arrays
-//Given two integer arrays arr1[] and arr2[] sorted in ascending order and an integer k. Find k pairs with smallest sums such that one element of a pair belongs to arr1[] and other element belongs to arr2[]
+//Given two integer arrays arr1[] and arr2[] sorted in ascending order and an integer k. Find k pairs with smallest sums
+// such that one element of a pair belongs to arr1[] and other element belongs to arr2[]
 //Examples:
 //Input :  arr1[] = {1, 7, 11}
 //         arr2[] = {2, 4, 6}

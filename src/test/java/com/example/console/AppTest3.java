@@ -71,4 +71,19 @@ public class AppTest3 {
         step = test.shortestPaht(matrix1);
         assertTrue(step == 6);
     }
+
+    @Test
+    public void medianOfSortedArrayTest() {
+        int[] num1 = {1, 3};
+        int[] num2 = {2};
+
+        MedianOfSortedArray test = new MedianOfSortedArray();
+        double median = test.medianOfSortedArray(num1, num2);
+        assertTrue(median == 2.0);
+
+        int[] num3 = {1, 2};
+        int[] num4 = {3, 4};
+        median = test.medianOfSortedArray(num3, num4);
+        assertTrue(median == 2.5);
+    }
 }
