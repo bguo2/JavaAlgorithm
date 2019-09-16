@@ -28,8 +28,8 @@ public class BurstBallons {
         int[] temp = new int[n+2];
         //add 1 at the front and 1 to end
         temp[0] = 1;
-        temp[n-1] = 1;
-        System.arraycopy(numbers, 0, temp, 1, n-1);
+        temp[n+1] = 1;
+        System.arraycopy(numbers, 0, temp, 1, n);
         int[][] dp = new int[n + 2][n + 2];
         return burst(temp, dp, 1 , numbers.length);
     }
