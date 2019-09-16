@@ -58,9 +58,7 @@ public class ShortestPathGetAllKeys {
         for(int i= 0; i < rows; i++) {
             for(int j = 0; j < cols; j++) {
                 if(matrix[i][j] == '@') {
-                    startRow = i;
-                    startCol = j;
-                    queue.offer(new int[]{i, j, 0});
+                    queue.offer(new int[]{i, j, 0, 0});
                     visited.add(String.format("%d:%d:0", i, j));
                 }
                 else if(matrix[i][j] >= 'a' && matrix[i][j] <= 'f')
@@ -68,47 +66,42 @@ public class ShortestPathGetAllKeys {
             }
         }
 
-        int res = 0;
         int[] dRow = {-1, 0, 1, 0};
         int[] dCol = {0, -1, 0, 1};
         while (!queue.isEmpty()) {
             //same level
-            int size = queue.size();
-            for(int i = 0; i < size; i++) {
-                int[] node = queue.poll();
-                int curRow = node[0];
-                int curCol = node[1];
-                int curKeys = node[2];
-                //retrieved all keys
-                if(curKeys == (1 << keyCount) - 1)
-                    return res;
-                for(int j = 0; j < 4; j++) {
-                    int nextRow = curRow + dRow[j];
-                    int nextCol = curCol + dCol[j];
-                    if(nextRow < 0 || nextRow >= rows || nextCol < 0 || nextCol >= cols)
-                        continue;
-                    //wall
-                    if(matrix[nextRow][nextCol] == '#')
-                        continue;
-                    //lock: check if the key match lock
-                    if(matrix[nextRow][nextCol] >= 'A' && matrix[nextRow][nextCol] <= 'F' &&
-                            (curKeys >> (matrix[nextRow][nextCol] - 'A') & 1) == 0)
-                        continue;
-                    //keys
-                    int nextKeys = curKeys;
-                    if(matrix[nextRow][nextCol] >= 'a' && matrix[nextRow][nextCol] <= 'f') {
-                        nextKeys |=  (1 << (matrix[nextRow][nextCol] - 'a'));
-                    }
+            int[] node = queue.poll();
+            int curRow = node[0];
+            int curCol = node[1];
+            int curKeys = node[2];
+            int curStep = node[3];
+            //retrieved all keys
+            if(curKeys == (1 << keyCount) - 1)
+                return curStep;
+            for(int j = 0; j < 4; j++) {
+                int nextRow = curRow + dRow[j];
+                int nextCol = curCol + dCol[j];
+                if(nextRow < 0 || nextRow >= rows || nextCol < 0 || nextCol >= cols)
+                    continue;
+                //wall
+                if(matrix[nextRow][nextCol] == '#')
+                    continue;
+                //lock: check if the key match lock
+                if(matrix[nextRow][nextCol] >= 'A' && matrix[nextRow][nextCol] <= 'F' &&
+                        (curKeys >> (matrix[nextRow][nextCol] - 'A') & 1) == 0)
+                    continue;
+                //keys
+                int nextKeys = curKeys;
+                if(matrix[nextRow][nextCol] >= 'a' && matrix[nextRow][nextCol] <= 'f') {
+                    nextKeys |=  (1 << (matrix[nextRow][nextCol] - 'a'));
+                }
 
-                    String tmp = String.format("%d:%d:%d", nextRow, nextCol, nextKeys);
-                    if(!visited.contains(tmp)) {
-                        queue.offer(new int[] {nextRow, nextCol, nextKeys});
-                        visited.add(tmp);
-                    }
+                String tmp = String.format("%d:%d:%d", nextRow, nextCol, nextKeys);
+                if(!visited.contains(tmp)) {
+                    queue.offer(new int[] {nextRow, nextCol, nextKeys, curStep+1});
+                    visited.add(tmp);
                 }
             }
-
-            res++;
         }
 
         return -1;
