@@ -18,6 +18,7 @@ public class RestoreIPAddress {
         helper(s, 0, "", result);
         return result;
     }
+
     public static void helper(String s, int n, String out, List<String> result) {
         //possible result
         if (n == 4) {

@@ -189,17 +189,13 @@ public class ConsoleApplicationTests {
     @Test
     public void MergeKSortedListTest() {
         MergeKSortedList<Integer> merge = new MergeKSortedList<Integer>();
-        MergeKSortedList<Integer>.ResultWrapper<Integer> in1 = merge.new ResultWrapper<Integer>();
+        MergeKSortedList<Integer>.SortedListIteratorImp<Integer> in1 = merge.new SortedListIteratorImp<Integer>();
         in1.add(3);
         in1.add(7);
         in1.add(9);
         in1.add(11);
 
-        while (in1.hasNext()) {
-            System.out.println(in1.next());
-        }
-
-        MergeKSortedList<Integer>.ResultWrapper<Integer> in2 = merge.new ResultWrapper<Integer>();
+        MergeKSortedList<Integer>.SortedListIteratorImp<Integer> in2 = merge.new SortedListIteratorImp<Integer>();
         in2.add(6);
         in2.add(13);
 

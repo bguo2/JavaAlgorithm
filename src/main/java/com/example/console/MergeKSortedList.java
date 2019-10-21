@@ -25,27 +25,29 @@ public class MergeKSortedList<E extends Comparable<? super E>> {
         }
     }
 
-    public class ResultWrapper<E> implements SortedListIterator<E> {
-        private List<E> result = new ArrayList<E>();
-        private int curIndex = 0;
+    public class SortedListIteratorImp<E> implements SortedListIterator<E> {
+        private List<E> list = new ArrayList<>();
+        private Iterator<E> iterator = list.iterator();
 
         @Override
         public boolean hasNext() {
-            return curIndex != result.size();
+            return iterator.hasNext();
         }
 
         @Override
-        public E next(){
-            return result.get(curIndex++);
+        public E next() {
+            E val = iterator.next();
+            return val;
         }
 
-        public void add(E value){
-            result.add(value);
+        public void add(E val) {
+            list.add(val);
+            iterator = list.iterator();
         }
     }
 
     public SortedListIterator<E> mergeSortedList(List<SortedListIterator<E>> input) {
-        ResultWrapper<E> result = new ResultWrapper<E>();
+        SortedListIteratorImp<E> result = new SortedListIteratorImp<E>();
         if(input == null || input.size() == 0)
             return result;
         PriorityQueue<IteratorContainer<E>> queue = new PriorityQueue<>();
