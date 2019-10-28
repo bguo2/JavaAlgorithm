@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
@@ -85,5 +86,34 @@ public class AppTest3 {
         int[] num4 = {3, 4};
         median = test.medianOfSortedArray(num3, num4);
         assertTrue(median == 2.5);
+    }
+
+    @Test
+    public void iterator1Test() {
+        List<Integer> list = new ArrayList<>();
+        Iterator1<Integer> iterator1 = new Iterator1<>(list.iterator());
+
+        boolean hasNext = iterator1.hasNext();
+        assertTrue("should has no ", hasNext == false);
+        Integer e = iterator1.getNextObject();
+        assertTrue(e == null);
+
+        list.add(1);
+        list.add(20);
+        list.add(30);
+
+        iterator1 = new Iterator1<>(list.iterator());
+        hasNext = iterator1.hasNext();
+        assertTrue(hasNext);
+        e = iterator1.getNextObject();
+        assertTrue(e == 1);
+
+        hasNext = iterator1.hasNext();
+        assertTrue(hasNext);
+        e = iterator1.getNextObject();
+        assertTrue(e == 20);
+
+        e = iterator1.getNextObject();
+        assertTrue(e == 30);
     }
 }

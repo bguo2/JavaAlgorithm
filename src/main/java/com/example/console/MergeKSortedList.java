@@ -42,7 +42,8 @@ public class MergeKSortedList<E extends Comparable<? super E>> {
 
         public void add(E val) {
             list.add(val);
-            iterator = list.iterator();
+            if(!list.isEmpty())
+                iterator = list.iterator();
         }
     }
 
