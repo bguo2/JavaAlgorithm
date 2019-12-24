@@ -116,4 +116,18 @@ public class AppTest3 {
         e = iterator1.getNextObject();
         assertTrue(e == 30);
     }
+
+    @Test
+    public void wordLadder1Test() {
+        List<String> dict = new ArrayList<String>() {{
+            add("hot");
+            add("dot");
+            add("dog");
+            add("lot");
+            add("log");
+        }};
+
+        List<List<String>> result = new WordLadder1().getResult("hit", "cog", dict);
+        assertTrue(result != null && result.size() == 2);
+    }
 }
