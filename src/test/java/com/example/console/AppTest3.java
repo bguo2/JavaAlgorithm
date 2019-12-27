@@ -130,4 +130,11 @@ public class AppTest3 {
         List<List<String>> result = new WordLadder1().getResult("hit", "cog", dict);
         assertTrue(result != null && result.size() == 2);
     }
+
+    @Test
+    public void wordPatternMatch() {
+        WordPatternMatch match = new WordPatternMatch();
+        boolean isMatch = match.patternMatch("abab", "redblueredblue");
+        assertTrue(isMatch);
+    }
 }
