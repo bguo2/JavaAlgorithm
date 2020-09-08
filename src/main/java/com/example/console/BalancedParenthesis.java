@@ -52,7 +52,6 @@ public class BalancedParenthesis {
             return result;
         HashSet<String> visited = new HashSet<>();
         Queue<String> queue = new LinkedList<>();
-        boolean found = false;
 
         queue.offer(input);
         while (!queue.isEmpty())
@@ -61,11 +60,8 @@ public class BalancedParenthesis {
             if(isValid(s))
             {
                 result.add(s);
-                found = true;
-            }
-
-            if(found)
                 continue;
+            }
 
             for(int i = 0; i < s.length(); i++)
             {
