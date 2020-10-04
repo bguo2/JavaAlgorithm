@@ -1,11 +1,12 @@
 package com.example.console;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.Iterator;
 import java.util.Stack;
 
-public class BST<T extends Comparable<? super   T>> implements Iterable<T> {
+public class BST<T extends Comparable<? super T>> implements Iterable<T> {
     private TreeNode<T> root;
     private int iterationType = 0;
 
@@ -115,7 +116,7 @@ public class BST<T extends Comparable<? super   T>> implements Iterable<T> {
             return;
         Stack<TreeNode<T>> stack = new Stack<>();
         stack.push(node);
-        while(!stack.isEmpty()){
+        while(!stack.isEmpty()) {
             node = stack.pop();
             System.out.println(node.data);
             if(node.right != null)
@@ -137,13 +138,11 @@ public class BST<T extends Comparable<? super   T>> implements Iterable<T> {
         if(node == null)
             return;
         Stack<TreeNode<T>> stack = new Stack<>();
-        while (true) {
+        while (!stack.isEmpty() || node != null) {
             if(node != null) {
                 stack.push(node);
                 node = node.left;
-            }else {
-                if(stack.isEmpty())
-                    break;
+            } else {
                 node = stack.pop();
                 System.out.println(node.data);
                 node = node.right;
@@ -164,7 +163,7 @@ public class BST<T extends Comparable<? super   T>> implements Iterable<T> {
             return;
         Stack<TreeNode<T>> stack = new Stack<>();
         stack.push(node);
-        while(!stack.isEmpty()){
+        while(!stack.isEmpty()) {
             TreeNode<T> tmp = stack.peek();
             boolean isLeaf = (tmp.left == null && tmp.right == null);
             boolean isSubtreeFinished = (tmp.left == node || tmp.right == node);

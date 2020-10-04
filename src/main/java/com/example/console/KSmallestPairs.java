@@ -1,6 +1,10 @@
 package com.example.console;
 
-import javafx.util.Pair;
+
+
+
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +47,7 @@ public class KSmallestPairs {
                 }
             }
 
-            result.add(new Pair<>(arr1[min_index], arr2[index2[min_index]]));
+            result.add(Pair.of(arr1[min_index], arr2[index2[min_index]]));
             index2[min_index]++;
             k--;
         }
