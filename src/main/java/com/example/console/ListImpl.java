@@ -1,11 +1,13 @@
 package com.example.console;
 
+import java.util.HashMap;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class ListImpl<T> {
-    private Node<T> head = null, last = null;
+public class ListImpl<T extends Comparable<? super T>> {
+
+    private Node<T> head = null, listLast = null;
     public class Node<T> {
         public Node<T> next, previous;
         private T data;
@@ -33,15 +35,17 @@ public class ListImpl<T> {
         }
     }
 
-    public void add(T value) {
+    public Node<T> add(T value) {
         if(head == null) {
             head = new Node<>(value);
-            last = head;
+            listLast = head;
         }
         else {
-            last.next = new Node<>(value);
-            last = last.next;
+            listLast.next = new Node<>(value);
+            listLast = listLast.next;
         }
+
+        return listLast;
     }
 
     public void remove(T value) {
@@ -55,8 +59,8 @@ public class ListImpl<T> {
                     head = current.next;
                     return;
                 }
-                //last
-                if(current == last) {
+                //listLast
+                if(current == listLast) {
                     pre.next = null;
                     return;
                 }
@@ -82,7 +86,7 @@ public class ListImpl<T> {
         head = pre;
     }
 
-    public Node<T> reverse(Node<T> node){
+    public Node<T> reverse(Node<T> node) {
         if(node == null || node.next == null)
             return node;
         Node<T> tmp = reverse(node.next);
@@ -91,45 +95,123 @@ public class ListImpl<T> {
         return tmp;
     }
 
-    public void reverse(int startIndex, int endIndex) {
-        if(endIndex <= startIndex || endIndex - startIndex < 1)
+    public void reversePrint(Node<T> node) {
+        if(node == null)
             return;
-        int count = 0;
-        Node<T> cur = head, start = null, end = null, last = head, preStart = null, afterEnd = null;
-        //find the start node and end node: the previous
-        while (cur != null) {
-            count++;
-            if(count == startIndex) {
-                start = cur;
-                preStart = last;
-            }
-            else if(count == endIndex) {
-                end = cur;
-                afterEnd = end.next;
-                break;
-            }
-            last = cur;
-            cur = cur.next;
+        reversePrint(node.next);
+        System.out.println(node.data);
+    }
+
+    //25. Reverse Nodes in k-Group
+    //Hard
+    //
+    //3051
+    //
+    //383
+    //
+    //Add to List
+    //
+    //Share
+    //Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
+    //
+    //k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should remain as it is.
+    //
+    //Follow up:
+    //
+    //Could you solve the problem in O(1) extra memory space?
+    //You may not alter the values in the list's nodes, only nodes itself may be changed.
+    //
+    //
+    //Example 1:
+    //
+    //
+    //Input: head = [1,2,3,4,5], k = 2
+    //Output: [2,1,4,3,5]
+    //Example 2:
+    //
+    //
+    //Input: head = [1,2,3,4,5], k = 3
+    //Output: [3,2,1,4,5]
+    //Example 3:
+    //
+    //Input: head = [1,2,3,4,5], k = 1
+    //Output: [1,2,3,4,5]
+    //Example 4:
+    //
+    //Input: head = [1], k = 1
+    //Output: [1]
+    public Node<T> reverse(Node<T> start, Node<T> end) {
+        Node<T> last = end.next;
+        Node<T> p = start;
+        Node<T> pre = null;
+        while(p != last) {
+            Node<T> next = p.next;
+            p.next = pre;
+            pre = p;
+            p = next;
         }
 
-        if(start == null)
-            return;
+        start.next = last;
+        return pre;
+    }
 
-        if(end == null) {
-            end = last;
+    public Node<T> reverseKGroup(Node<T> head, int k) {
+        if(head == null || head.next == null || k < 1)
+            return head;
+        Node<T> newStart = head;
+        Node<T> newEnd = head;
+        Node<T> p = head;
+        int i = 0;
+        Node<T> fake = new Node<T>();
+        fake.next = head;
+        while(p != null) {
+            i++;
+            if(i % k == 0) {
+                Node<T> next = p.next;
+                Node<T> tmp = reverse(newStart, p);
+                if(newStart == head) {
+                    fake.next = tmp;
+                }
+                else {
+                    newEnd.next = tmp;
+                }
+                newEnd = newStart;
+                p = next;
+                newStart = next;
+            }
+            else {
+                p = p.next;
+            }
         }
 
-        //terminate the link
-        if(end != null)
-            end.next = null;
+        return fake.next;
+    }
 
-        Node<T> newHead = reverse(start);
+    //palidrome linked list
+    //Given a singly linked list, determine if it is a palindrome.
+    //
+    //Example 1:
+    //
+    //Input: 1->2
+    //Output: false
+    //Example 2:
+    //
+    //Input: 1->2->2->1
+    //Output: true
+   Node<T> left;
+    public boolean isPalindrome(Node<T> head) {
+        left = head;
+        return helper(head);
+    }
 
-        //relink preStart and afterEnd
-        preStart.next = newHead;
-        start.next = afterEnd;
-
-        if(start == head)
-            head = newHead;
+    private boolean helper(Node<T> right) {
+        if(right == null)
+            return true;
+        boolean ret = helper(right.next);
+        if(!ret)
+            return false;
+        boolean tmp = left.data.equals(right.data);
+        left = left.next;
+        return tmp;
     }
 }

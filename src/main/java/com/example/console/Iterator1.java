@@ -3,7 +3,7 @@ package com.example.console;
 
 import java.util.Iterator;
 
-//use Iterator's next() to implement hasNext and getObect - get next element
+//use Iterator's next() to implement hasNext and getObject - get next element
 public class Iterator1<E> {
     private Iterator<E> iterator;
     private E nextElement = null;

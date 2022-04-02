@@ -30,8 +30,10 @@ public class MedianOfSortedArray {
     private int findKth(int[] num1, int i, int[] num2, int j, int k) {
         int m = num1.length;
         int n = num2.length;
-        if(i >= m) return num2[j + k - 1];
-        if(j >= n) return num1[i + k - 1];
+        if(i >= m)
+            return num2[j + k - 1];
+        if(j >= n)
+            return num1[i + k - 1];
         if(k == 1)
             return Math.min(num1[i], num2[j]);
         int midVal1 = (i + k/2 - 1 < m) ? num1[i + k/2 -1] : Integer.MAX_VALUE;

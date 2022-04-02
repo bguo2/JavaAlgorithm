@@ -1,12 +1,14 @@
 package com.example.console;
 
+import com.example.console.graph.DirectedGraph;
+import com.example.console.graph.UndirectedGraph;
+import com.example.console.math.Maths;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -79,36 +81,20 @@ public class ConsoleApplicationTests {
 
         QuickSelect test = new QuickSelect();
         int result = test.findKthNumber(2, new int[] {});
-        assertTrue(result == -1);
+       assertTrue(result == -1);
         result = test.findKthNumber(2, new int[] {5});
         assertTrue(result == -1);
         result = test.findKthNumber(1, new int[] {5});
         assertTrue(result == 5);
         result = test.findKthNumber(1, new int[] {9, 3});
-        assertTrue(result == 3);
+        assertTrue(result == 9);
         result = test.findKthNumber(3, new int[] {9, 3, 8, 7, 1});
         assertTrue(result == 7);
         result = test.findKthNumber(3, new int[] {9, -3, 8, 7, -1, 10, 5});
-        assertTrue(result == 5);
-        result = test.findKthNumber(3, new int[] {9, -3, 8, 7, -1, 10, 5});
-        assertTrue(result == 5);
-        result = test.findKthNumber(3, new int[] {-1, -3, 5, 7, 8, 9, 10});
-        assertTrue(result == 5);
-        result = test.findKthNumber(3, new int[] {10, 8, 7, 5, -1, -4, -5});
-        assertTrue(result == -1);
+        assertTrue(result == 8);
 
-        //return array
-        int[] result1 = test.findKSmallestNumber(3, new int[] {9, -3, 8, 7, -1, 10, 5});
-        assertTrue(result1 != null && result1.length == 3 &&
-            result1[0] == -3 && result1[1] == -1 && result1[2] == 5);
-
-        result1 = test.findKSmallestNumber(3, new int[] {-3, -1, 5, 7, 8, 9, 10});
-        assertTrue(result1 != null && result1.length == 3 &&
-                result1[0] == -3 && result1[1] == -1 && result1[2] == 5);
-
-        result1 = test.findKSmallestNumber(3, new int[] {10, 8, 7, 5, -1, -4, -5});
-        assertTrue(result1 != null && result1.length == 3 &&
-                result1[0] == -5 && result1[1] == -4 && result1[2] == -1);
+        result = test.findKthNumber(4, new int[] {3,2,3,1,2,4,5,5,6});
+        assertTrue(result == 4);
     }
 
     @Test
@@ -117,9 +103,8 @@ public class ConsoleApplicationTests {
         int[] result = test.quickSort(new int[] {5});
         assertTrue(result != null && result.length == 1);
 
-        result = test.quickSort(new int[] {9, 3, 8, 7, 1});
-        assertTrue(result.length == 5 && result[0] == 1 && result[1] == 3 && result[2] == 7 &&
-        result[3] == 8 && result[4] == 9);
+        result = test.quickSort(new int[] {9, 3, 5, 1, 7, 5, 8, 7, 3});
+        assertTrue(result.length == 9);
 
         result = test.quickSort(new int[] {1, 3, 7, 8, 9});
         assertTrue(result.length == 5 && result[0] == 1 && result[1] == 3 && result[2] == 7 &&
@@ -182,28 +167,56 @@ public class ConsoleApplicationTests {
 
     @Test
     public void MaxSlidingWindowTest(){
-        int[] nums = { 4,2,5,3,7,9 };
-        Integer[] result = MaxSlidingWindow.maxSlindingWindow(nums, 4);
+        int[] nums = { 1,3,-1,-3,5,3,6,7 };
+        int[] result = MaxSlidingWindow.maxSlindingWindow(nums, 3);
+
+        result = MaxSlidingWindow.maxSlidingNumber(nums, 3);
+        nums = new int[] { 8,10,9,-7,-4,-8,2,-6};
+        result = MaxSlidingWindow.maxSlidingNumber(nums, 5);
     }
 
     @Test
     public void MergeKSortedListTest() {
+        class MyList<E>  implements SortedListIterator<E> {
+            private List<E> list = new ArrayList<>();
+            private Iterator<E> iterator;
+
+            @Override
+            public boolean hasNext() {
+                boolean hasNext = iterator.hasNext();
+                return hasNext;
+            }
+
+            @Override
+            public E next() {
+                E e =  this.iterator.next();
+                return e;
+            }
+
+            public void add(E value) {
+                this.list.add(value);
+                iterator = list.iterator();
+            }
+        }
+
         MergeKSortedList<Integer> merge = new MergeKSortedList<Integer>();
-        MergeKSortedList<Integer>.SortedListIteratorImp<Integer> in1 = merge.new SortedListIteratorImp<Integer>();
+        MyList<Integer> in1 = new MyList<>();
         in1.add(3);
         in1.add(7);
-        in1.add(9);
+        in1.add(7);
         in1.add(11);
 
-        MergeKSortedList<Integer>.SortedListIteratorImp<Integer> in2 = merge.new SortedListIteratorImp<Integer>();
-        in2.add(6);
-        in2.add(13);
+        MyList<Integer> in2 = new MyList<>();
+        in2.add(4);
+        in2.add(12);
 
-        List<SortedListIterator<Integer>> list = new ArrayList<>();
-        list.add(in1);
-        list.add(in2);
+        List<SortedListIterator<Integer>> input = new ArrayList<>();
+        input.add(in1);
+        input.add(in2);
 
-        SortedListIterator<Integer> iterator = merge.mergeSortedList(list);
+        System.out.println();
+        List<Integer> result = merge.mergeSortedList(input);
+        Iterator<Integer> iterator = result.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
         }

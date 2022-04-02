@@ -12,6 +12,7 @@ public class StackImpWithQueue<T> {
             queue.offer(item);
         }
         else {
+            //queue: 3,2,1 push 4
             Queue<T> q1 = new LinkedList<>();
             q1.offer(item);
             while (!queue.isEmpty()) {

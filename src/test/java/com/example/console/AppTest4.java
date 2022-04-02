@@ -1,9 +1,12 @@
 package com.example.console;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.*;
 
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
@@ -48,5 +51,35 @@ public class AppTest4 {
         left = head;
 
         ret = helper(head);
+    }
+
+    @Test
+    public void CountStarsTest() {
+        String s = "*|**|*|**";
+        List<Integer> startIndex = Arrays.asList(1, 1);
+        List<Integer> endIndex = Arrays.asList(1, 6);
+
+        List<Integer> result = CountStars.countStarts(s, startIndex , endIndex);
+        assertTrue("", result != null && result.get(0) == 0 && result.get(1) == 2);
+
+        endIndex = Arrays.asList(1, 8);
+        result = CountStars.countStarts(s, startIndex , endIndex);
+        assertTrue("", result != null && result.get(0) == 0 && result.get(1) == 3);
+
+        endIndex = Arrays.asList(1, 20);
+        result = CountStars.countStarts(s, startIndex , endIndex);
+        assertTrue("", result != null && result.get(0) == 0 && result.get(1) == 3);
+
+        s = "*|||**";
+        endIndex = Arrays.asList(1, 6);
+        result = CountStars.countStarts(s, startIndex , endIndex);
+        assertTrue("", result != null && result.get(0) == 0 && result.get(1) == 0);
+    }
+
+    @Test
+    public void LargestRectangleHistogramTest() {
+        int[] height = {2,1,5,6,2,3};
+        int area = LargestRectangleHistogram.largestRectangle(height);
+        assertTrue("", area == 10 );
     }
 }

@@ -25,7 +25,7 @@ import java.util.PriorityQueue;
 //
 //Input: quality = [3,1,10,10,1], wage = [4,8,2,2,7], K = 3
 //Output: 30.66667
-//Explanation: We pay 4 to 0-th worker, 13.33333 to 2-th and 3-th workers seperately.
+//Explanation: We pay 4 to 0-th worker, 13.33333 to 2-th and 3-th workers separately.
 public class MinHiringCost {
     //Suppose we have a team of two workers (w1, q1), (w2, q2). What we need to pay is max(w1, q1*w2/q2) + max(w2, q2*w1/q1).
     // And w1 = q1*w1/q1, w2 = q2*w2/q2. So the cost is q1*max(w1/q1,w2/q2) + q2*max(w1/q1,w2/q2) = max(w1/q1,w2/q2) * (q1+q2)
@@ -43,7 +43,7 @@ public class MinHiringCost {
         int wage;
         int quality;
 
-        public Worker(int w, int q) {
+        private Worker(int w, int q) {
             this.ratio = w*1.0/q;
             this.quality = q;
             this.wage = w;
@@ -84,6 +84,7 @@ public class MinHiringCost {
             if(maxQualityq.size() > k) {
                 sumq -= maxQualityq.poll().quality;
             }
+
             if(maxQualityq.size() == k)
                 cost = Math.min(cost, sumq*worker.ratio);
         }

@@ -20,19 +20,19 @@ public class WellFormedParenthesis {
         if(n <= 0)
             return null;
         List<String> result = new ArrayList<>();
-        backTrck(result, "", 0, 0, n);
+        backTrack(result, "", 0, 0, n);
         return result;
     }
 
-    private static void backTrck(List<String> result, String cur, int open, int close, int max) {
+    private static void backTrack(List<String> result, String cur, int open, int close, int max) {
         if(cur.length() == max*2) {
             result.add(cur);
             return;
         }
 
         if(open < max)
-            backTrck(result, cur + "(", open+1, close, max);
+            backTrack(result, cur + "(", open+1, close, max);
         if(close < open)
-            backTrck(result, cur + ")", open, close+1, max);
+            backTrack(result, cur + ")", open, close+1, max);
     }
 }

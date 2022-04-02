@@ -1,15 +1,13 @@
 package com.example.console;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 //Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end,
 // such that only one letter can be changed at a time and each intermediate word must exist in the dictionary. For example, given:
 //
 //start = "hit"
 //end = "cog"
-//dict = ["hot","dot","dog","lot","log"]
+//dict = ["hot","dot","dog","lot","log", "cog"]
 //One shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog", the program should return its length 5.
 public class WordLadder {
     private class WordNode {
@@ -22,13 +20,14 @@ public class WordLadder {
         }
     }
 
-    public int getShortest(String startWord, String endWord, Set<String> wordDict) {
-        if(startWord == null || startWord.length() == 0 || endWord == null || endWord.length() == 0 || wordDict == null || wordDict.size() == 0)
+    public int getShortest(String startWord, String endWord, List<String> words) {
+        if(startWord == null || startWord.length() == 0 || endWord == null || endWord.isEmpty() || words == null || words.isEmpty())
             return 0;
 
+        HashSet<String> wordDict = new HashSet<>(words);
+        if(!wordDict.contains(endWord))
+            return 0;
         Queue<WordNode> queue = new LinkedList<>();
-        wordDict.add(endWord);
-
         queue.offer(new WordNode(startWord, 1));
 
         while (!queue.isEmpty()){

@@ -35,7 +35,8 @@ public class OrderlyQueue {
         String ans = S;
         for (int i = 1; i < S.length(); ++i) {
             String tmp = S.substring(i) + S.substring(0, i);
-            if (tmp.compareTo(ans) < 0) ans = tmp;
+            if (tmp.compareTo(ans) < 0)
+                ans = tmp;
         }
         return ans;
     }

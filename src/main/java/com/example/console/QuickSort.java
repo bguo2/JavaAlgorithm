@@ -14,27 +14,30 @@ public class QuickSort {
     private void quickSort(int start, int end){
         if(start >= end)
             return;
-        int mid = (start + end) / 2;
-        int pivot = numbers[mid];
+        int pindex = partition(start, end);
+        quickSort(start, pindex-1);
+        quickSort(pindex+1, end);
+    }
 
-        int low= start, high = end;
-        while (low <= high) {
-            while (numbers[low]< pivot)
-                low++;
-            while (numbers[high] > pivot)
-                high--;
-            if(low <= high){
-                int tmp = numbers[low];
-                numbers[low]= numbers[high];
-                numbers[high] = tmp;
-                low++;
-                high--;
+    //after partition, all elements < pivot will be at its left side,
+    //all > pivot will be at its right side
+    private int partition(int start, int end) {
+        int pivot = numbers[end];
+        int pindex = start;
+        for(int i = start; i < end; i++) {
+            if(numbers[i] <= pivot) {
+                swap(i, pindex);
+                pindex++;
             }
         }
 
-        if(start < high)
-            quickSort(start, high);
-        if(end > low)
-            quickSort(low, end);
+        swap(pindex, end);
+        return pindex;
     }
-}
+
+    private void swap(int i, int j) {
+        int tmp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = tmp;
+    }
+ }

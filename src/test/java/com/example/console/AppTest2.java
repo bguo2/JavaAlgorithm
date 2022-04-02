@@ -1,12 +1,15 @@
 package com.example.console;
 
+import com.example.console.DynamicPg.ShortestDistToAllBuildings;
+import com.example.console.graph.ShortestPathGraph;
+import com.example.console.subarray.MinLargestSumSubArrays;
+import com.example.console.subarray.MinSubArrayWithGreaterThanValue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -57,6 +60,15 @@ public class AppTest2 {
         T = "AABC";
         result = MinWindowSubstring.getMinWindowSubstring(S, T);
         assertTrue(result.equals("ADOABEC"));
+
+        S = "a";
+        T = "a";
+        result = MinWindowSubstring.getMinWindowSubstring(S, T);
+        assertTrue(result.equals("a"));
+        S = "aa";
+        T = "aa";
+        result = MinWindowSubstring.getMinWindowSubstring(S, T);
+        assertTrue(result.equals("aa"));
     }
 
     @Test
@@ -74,7 +86,7 @@ public class AppTest2 {
 
     @Test
     public void minLargeSumSubarrayTest() {
-        MinLargeSumSubArrays test = new MinLargeSumSubArrays();
+        MinLargestSumSubArrays test = new MinLargestSumSubArrays();
         int result = test.splitArray(new int[] {7, 2, 5, 10, 8}, 2);
         assertTrue(result == 18);
         result = test.splitArray(new int[] {7, 2, 5, 10, 1}, 2);

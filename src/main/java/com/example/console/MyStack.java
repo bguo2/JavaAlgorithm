@@ -1,32 +1,31 @@
 package com.example.console;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class MyStack<T> {
-    ArrayList<T> queue = new ArrayList<>();
+    Queue<T> queue = new LinkedList<>();
 
     public void push(T value) {
         if(queue.isEmpty())
             queue.add(value);
         else{
-            ArrayList<T> tmp = new ArrayList<>();
+            Queue<T> tmp = new LinkedList<>();
             tmp.add(value);
             while (!queue.isEmpty()){
-                tmp.add(queue.remove(0));
+                tmp.add(queue.poll());
             }
             queue = tmp;
         }
     }
 
     public T pop() {
-        return queue.remove(0);
+        return queue.poll();
     }
 
     public T peek(){
-        return queue.get(0);
+        return queue.peek();
     }
 
     public boolean isEmpty() {

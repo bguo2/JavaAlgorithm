@@ -15,7 +15,7 @@ public class BalancedParenthesis {
                 int[] a = {i, 0};
                 stack.push(a);
             }
-            else if(input.charAt(i) == ')'){
+            else if(input.charAt(i) == ')') {
                 //not match ), the top one is )
                 if(stack.isEmpty() || stack.peek()[1] == 1) {
                     int[] a = {i, 1};
@@ -48,8 +48,11 @@ public class BalancedParenthesis {
     public static List<String> getallbalancedParentthesis(String input)
     {
         List<String> result = new ArrayList<>();
-        if(input == null || input.isEmpty())
+        if(input == null || input.isEmpty()) {
+            result.add("");
             return result;
+        }
+
         HashSet<String> visited = new HashSet<>();
         Queue<String> queue = new LinkedList<>();
 
@@ -63,20 +66,24 @@ public class BalancedParenthesis {
                 continue;
             }
 
-            for(int i = 0; i < s.length(); i++)
+            //has not found any valid, continue
+            if(result.isEmpty())
             {
-                // we only try to remove left or right paren
-                if (s.charAt(i) != '(' && s.charAt(i) != ')') continue;
-
-                String tmp = s.substring(0, i) + s.substring(i+1);
-                if(!visited.contains(tmp))
+                //remove one ( or )
+                for(int i = 0; i < s.length(); i++)
                 {
-                    visited.add(tmp);
-                    queue.offer(tmp);
+                    // we only try to remove left or right paren
+                    if (s.charAt(i) != '(' && s.charAt(i) != ')') continue;
+
+                    String tmp = s.substring(0, i) + s.substring(i+1);
+                    if(!visited.contains(tmp))
+                    {
+                        visited.add(tmp);
+                        queue.offer(tmp);
+                    }
                 }
             }
         }
-
         return result;
     }
 

@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 
 //merge K sorted arrays
 public class MergeKSortedArray {
-    private PriorityQueue<ArrayContainer> queue = new PriorityQueue<ArrayContainer>();
+    private PriorityQueue<ArrayContainer> queue = new PriorityQueue<>();
 
     private class ArrayContainer implements Comparable<ArrayContainer> {
         public int[] array;

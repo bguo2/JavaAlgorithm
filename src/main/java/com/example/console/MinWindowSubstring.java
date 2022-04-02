@@ -9,60 +9,53 @@ import java.util.HashMap;
 //If there is no such window in S that covers all characters in T, return the empty string "".
 //If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
 public class MinWindowSubstring {
-
-    public static String getMinWindowSubstring(String S, String T){
-        if(S == null || S.isEmpty())
+    public static  String getMinWindowSubstring(String s, String t) {
+        if(s == null || s.length() == 0 || t==null || t.length() ==0 || t.length() > s.length())
             return "";
-        if(T == null || T.isEmpty())
-            return S;
-        HashMap<Character, Integer> goalMap = new HashMap<>();
         HashMap<Character, Integer> map = new HashMap<>();
-        for(int i = 0; i < T.length(); i++)
-        {
-            goalMap.put(T.charAt(i), goalMap.getOrDefault(T.charAt(i), 0)+1);
+        for(int i = 0; i < t.length(); i++) {
+            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) + 1);
         }
 
-        int goalSize = T.length();
-        int minSize = S.length();
+        int total = 0;
         String result = "";
-        int pre = 0, total = 0;
-        for(int i = 0; i < S.length(); i++)
-        {
-            Character c = S.charAt(i);
-
-            if(!goalMap.containsKey(c))
+        int start = 0;
+        int min = Integer.MAX_VALUE;
+        HashMap<Character, Integer> tmpMap = new HashMap<>();
+        for(int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if(!map.containsKey(c))
                 continue;
-            //contain c
-            int count = map.getOrDefault(c, 0);
-            if(count < goalMap.get(c))
+            int count = tmpMap.getOrDefault(c, 0);
+            if(count < map.get(c)) {
                 total++;
-            map.put(c, count+1);
-            if(total == goalSize)
-            {
-                //when total reaches the goal, trim from left until no more chars can be trimmed.
-                while (!map.containsKey(S.charAt(pre)) || map.get(S.charAt(pre)) > goalMap.get(S.charAt(pre)))
-                {
-                    if(map.containsKey(S.charAt(pre)) && map.get(S.charAt(pre)) > goalMap.get(S.charAt(pre)))
-                    {
-                        if(map.get(S.charAt(pre)) == 1)
-                            map.remove(S.charAt(pre));
-                        else
-                            map.put(S.charAt(pre), map.get(S.charAt(pre)) - 1);
-                    }
-                    pre++;
-                }
+            }
+            tmpMap.put(c, count+1);
 
-                if(minSize > i-pre+1)
-                {
-                    minSize = i - pre + 1;
-                    result = S.substring(pre, i+1);
-                    total--;
-                    if(map.get(S.charAt(pre)) == 1)
-                        map.remove(S.charAt(pre));
+            if(total < t.length())
+                continue;
+            c = s.charAt(start);
+            while(!map.containsKey(c) || tmpMap.get(c) > map.get(c)) {
+                if(map.containsKey(c) && tmpMap.get(c) > map.get(c)) {
+                    if(tmpMap.get(c) == 1)
+                        tmpMap.remove(c);
                     else
-                        map.put(S.charAt(pre), map.get(S.charAt(pre)) - 1);
-                    pre++;
+                        tmpMap.put(c, tmpMap.get(c)-1);
                 }
+                start++;
+                c = s.charAt(start);
+            }
+
+            if(min > i - start +1) {
+                result = s.substring(start, i+1);
+                min = result.length();
+                c = s.charAt(start);
+                if(tmpMap.get(c) == 1)
+                    tmpMap.remove(c);
+                else
+                    tmpMap.put(c, tmpMap.get(c)-1);
+                start++;
+                total--;
             }
         }
 

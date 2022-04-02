@@ -1,5 +1,6 @@
 package com.example.console;
 
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 //There are given n ropes of different lengths, we need to connect these ropes into one rope.

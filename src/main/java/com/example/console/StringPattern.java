@@ -2,36 +2,75 @@ package com.example.console;
 
 public class StringPattern {
 
-    //* --> Matches with 0 or more instances of any character or set of characters.
-    //? --> Matches with any one character.
-    //For example, “g*ks” matches with “geeks” match. And string “ge?ks*” matches with “geeksforgeeks”
-    //(note ‘*’ at the end of first string). But “g*k” doesn’t match with “gee” as character ‘k’ is not present in second string
-    public static boolean isMatch(String pattern, String source){
-        // match
-        if((source == null && pattern == null) || (pattern.length() == 0 && source.length() == 0))
-            return true;
-        //pattern ends but source has more
-        if(pattern.length() == 0 && source.length() > 0)
-            return false;
-        //source ends, but pattern has more
-        if(source.length() == 0 && pattern.length() > 0) {
-            //if pattern is * and no other more
-            if(pattern.charAt(0) == '*' && pattern.length() == 1) {
-                    return true;
-            }
-            return false;
+    //'.' Matches any single character.
+    //'*' Matches zero or more of the preceding element.
+    //The matching should cover the entire input string (not partial).
+    //
+    //Note:
+    //
+    //s could be empty and contains only lowercase letters a-z.
+    //p could be empty and contains only lowercase letters a-z, and characters like . or *.
+    //Example 1:
+    //
+    //Input:
+    //s = "aa"
+    //p = "a"
+    //Output: false
+    //Explanation: "a" does not match the entire string "aa".
+    //Example 2:
+    //
+    //Input:
+    //s = "aa"
+    //p = "a*"
+    //Output: true
+    //Explanation: '*' means zero or more of the precedeng element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
+    //Example 3:
+    //
+    //Input:
+    //s = "ab"
+    //p = ".*"
+    //Output: true
+    //Explanation: ".*" means "zero or more (*) of any character (.)".
+    //Example 4:
+    //
+    //Input:
+    //s = "aab"
+    //p = "c*a*b"
+    //Output: true
+    //Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore it matches "aab".
+    //Example 5:
+    //
+    //Input:
+    //s = "mississippi"
+    //p = "mis*is*p*."
+    //Output: false
+    //
+    //
+
+    public static boolean isMatch(String s, String p) {
+        if(p.isEmpty()) {
+            return s.isEmpty();
         }
 
-        //patten is ? or first char matches, continues next char
-        if(pattern.charAt(0) == '?' || pattern.charAt(0) == source.charAt(0))
-            return isMatch(pattern.substring(1), source.substring(1));
-
-        //If there is *, then there are two possibilities
-        // a) We consider current character of second string
-        // b) We ignore current character of second string.
-        if(pattern.charAt(0) == '*'){
-            return isMatch(pattern.substring(1), source) || isMatch(pattern, source.substring(1));
+        // if we have '*' in pattern, if this happens to be the second char
+        // eg: "" and "a*" both matches
+        if(s.isEmpty()) {
+            if(p.length() > 1 && p.charAt(1) == '*')
+                return isMatch(s, p.substring(2));
+            return p.isEmpty();
         }
+
+        boolean firstMatch = p.charAt(0) == '.' || s.charAt(0) == p.charAt(0);
+        if(p.length() > 1 && p.charAt(1) == '*') {
+            //match 0 preceding char
+            return isMatch(s, p.substring(2)) ||
+                    //match 1+ preceding char
+                    (firstMatch && isMatch(s.substring(1), p));
+        }
+
+        //match 1 char
+        if(firstMatch)
+            return isMatch(s.substring(1), p.substring(1));
 
         return false;
     }

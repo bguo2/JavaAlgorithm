@@ -1,5 +1,9 @@
 package com.example.console;
 
+import com.example.console.binarytree.BinaryTreePathSum;
+import com.example.console.matrix.MinimumSteps;
+import com.example.console.recursion.RestoreIPAddress;
+import com.example.console.recursion.WordBreak;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,17 +16,6 @@ import static junit.framework.TestCase.assertTrue;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ConsoleAppTest1 {
-
-    @Test
-    public void subsetTest() {
-        int[] arr = {4,3,6};
-        ArrayList<ArrayList<Integer>>  result = Subsets.subsets(arr);
-        Iterator<ArrayList<Integer>> iterator = result.iterator();
-
-        while(iterator.hasNext()){
-            ArrayList<Integer> list = iterator.next();
-        }
-    }
 
     @Test
     public void balancedParenthesisTest() {
@@ -69,12 +62,13 @@ public class ConsoleAppTest1 {
     @Test
     public void wordLadderTest() {
         WordLadder ladder = new WordLadder();
-        Set<String> wordDict = new HashSet<String>();
+        List<String> wordDict = new ArrayList<>();
         wordDict.add("hot");
         wordDict.add("dot");
         wordDict.add("dog");
         wordDict.add("lot");
         wordDict.add("log");
+        wordDict.add("cog");
         int count = ladder.getShortest("hit", "cog", wordDict);
         assertTrue(count == 5);
     }
@@ -102,6 +96,9 @@ public class ConsoleAppTest1 {
 
         positions = StringConcatenation.getStartingIndex("abcdababcd", new String[] {"ab", "ab"});
         assertTrue(positions.size() == 1 && positions.get(0) == 4);
+
+        positions = StringConcatenation.getStartingIndex("aaaaaaaaaaaaaa", new String[] {"aa", "aa"});
+
     }
 
     @Test
@@ -126,6 +123,18 @@ public class ConsoleAppTest1 {
         curNode.addNode(1, false);
 
         result = pathSum.getAllPathsSum(root, 22);
+
+        //
+        BinaryTreePathSum.TreeNode root1 = pathSum.new TreeNode(null, null, 5);
+        root1.addNode(2, true);
+        BinaryTreePathSum.TreeNode rightNode = root1.addNode(11, false);
+        BinaryTreePathSum.TreeNode leftNode = rightNode.addNode(6, true);
+        rightNode.addNode(14, false);
+        leftNode.addNode(3, true);
+
+        boolean exists = pathSum.existsPath(root1, 17);
+        assertTrue(exists);
+
     }
 
     @Test
@@ -154,15 +163,24 @@ public class ConsoleAppTest1 {
         set.add("code");
         set.add("leet");
         Boolean result = WordBreak.wordBreak("leetcode", set);
+        assertTrue(result);
+        set = new HashSet<>(Arrays.asList("a", "abc", "b", "d"));
+        result = WordBreak.wordBreak("abcd", set);
+        assertTrue(result);
+        set = new HashSet<>(Arrays.asList("cats", "dog", "sand", "and", "cat"));
+        result = WordBreak.wordBreak("catsandog", set);
+        assertTrue(!result);
     }
 
     @Test
     public void minimumHeightTree() {
         int[][] edges = {{1,0}, {1,2}, {1,3}};
         List<Integer> result = MinimumHeightTrees.findMinHeightTrees(4, edges);
+        assertTrue("", !result.isEmpty() && result.size() == 1 && result.get(0) == 1);
 
         int[][] edges1 = {{0,3},{1,3},{2,3}, {4,3}, {5,4}};
         result = MinimumHeightTrees.findMinHeightTrees(6, edges1);
+        assertTrue("", !result.isEmpty() && result.size() == 2 && result.get(0) == 3 && result.get(1) == 4);
     }
 
     @Test

@@ -1,5 +1,9 @@
 package com.example.console;
 
+import com.example.console.matrix.PacificAtlanticWaterFlow;
+import com.example.console.matrix.ShortestPathGetAllKeys;
+import com.example.console.matrix.SwimInRisingWater;
+import com.example.console.recursion.WordPatternMatch;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -125,16 +130,33 @@ public class AppTest3 {
             add("dog");
             add("lot");
             add("log");
+            add("cog");
         }};
 
-        List<List<String>> result = new WordLadder1().getResult("hit", "cog", dict);
+        List<List<String>> result = new WordLadder1().findLadders("hit", "cog", dict);
         assertTrue(result != null && result.size() == 2);
+
+        //beginWord = "hit"
+        //endWord = "cog"
+        //wordList = ["hot","dot","dog","lot","log"]
+        //"red"
+        //"tax"
+        //["ted","tex","red","tax","tad","den","rex","pee"]
     }
 
     @Test
     public void wordPatternMatch() {
         WordPatternMatch match = new WordPatternMatch();
-        boolean isMatch = match.patternMatch("abab", "redblueredblue");
+        boolean isMatch = match.patternMatch("abc", "redblueredblue");
         assertTrue(isMatch);
+        isMatch = match.patternMatch("aaaa", "asdasdasdasd");
+        assertTrue(isMatch);
+        isMatch = match.patternMatch("aabb", "xyzabcxzyabc");
+        assertTrue(isMatch == false);
+
+        isMatch = match.patternMatch("a", "xyzabcxyzabc");
+        assertTrue(isMatch);
+        isMatch = match.patternMatch("ab", "aa");
+        assertFalse(isMatch);
     }
 }

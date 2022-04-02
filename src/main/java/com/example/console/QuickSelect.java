@@ -4,57 +4,59 @@ import java.util.Arrays;
 
 //select Kth largest integer from n unsorted integers, k from 1..n
 public class QuickSelect {
-    private int[] numbers;
+    int [] nums;
 
     public int findKthNumber(int k, int[] numbers) {
         if(numbers == null || numbers.length < k)
             return -1;
-        this.numbers = numbers;
-        return find(k, 0, numbers.length - 1);
+        this.nums = numbers;
+        return quickselect(0, numbers.length - 1, numbers.length - k);
     }
 
-    private int find(int k, int start,  int end){
+    public int quickselect(int left, int right, int k_smallest) {
+    /*
+    Returns the k-th smallest element of list within left..right.
+    */
 
-        int pivot = numbers[end];
+        if (left == right) // If the list contains only one element,
+            return this.nums[left];  // return that element
 
-        int left = start, right = end;
-        while (left < right) {
+        // select a random pivot_index
+        //Random random_num = new Random();
+        //int pivot_index = left + random_num.nextInt(right - left);
 
-            while (left < right && numbers[left] < pivot)
-                left++;
-            while ((left < right && numbers[right] > pivot))
-                right--;
-            if(left < right)
-                swap(left, right);
+        int pivot_index = right;
+        pivot_index = partition(left, right);
+
+        // the pivot is on (N - k)th smallest position
+        if (k_smallest == pivot_index)
+            return this.nums[k_smallest];
+            // go left side
+        else if (k_smallest < pivot_index)
+            return quickselect(left, pivot_index - 1, k_smallest);
+        // go right side
+        return quickselect(pivot_index + 1, right, k_smallest);
+    }
+
+    public int partition(int left, int right) {
+        int pivot = this.nums[right];
+        // 1. move pivot to end
+        int store_index = left;
+        // 2. move all smaller elements to the left
+        for (int i = left; i <= right; i++) {
+            if (this.nums[i] < pivot) {
+                swap(store_index, i);
+                store_index++;
+            }
         }
-
-        swap(left, right);
-        if(k == left + 1)
-            return pivot;
-        if(k < left + 1)
-            return find(k, start, left - 1);
-        return find(k, left + 1, end);
+        // 3. move pivot to its final place
+        swap(store_index, right);
+        return store_index;
     }
 
-    private void swap(int i, int right) {
-        int tmp = numbers[i];
-        numbers[i] = numbers[right];
-        numbers[right] = tmp;
-    }
-
-    //find the K smallest numners in an array
-    public int[] findKSmallestNumber(int k, int[] numbers)
-    {
-        if(numbers == null || numbers.length < k)
-            return null;
-        this.numbers = numbers;
-        find(k, 0, numbers.length - 1);
-        int tmp = k;
-        while(k > 1)
-        {
-            k--;
-            find(k,0, k);
-        }
-        return Arrays.copyOf(this.numbers, tmp);
+    public void swap(int a, int b) {
+        int tmp = this.nums[a];
+        this.nums[a] = this.nums[b];
+        this.nums[b] = tmp;
     }
 }

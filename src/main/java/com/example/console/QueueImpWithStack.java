@@ -22,13 +22,18 @@ public class QueueImpWithStack<T> {
         if (stack.empty()) {
             stack.push(item);
         } else {
-            stack.push(item);
-            Stack<T> stack1 = new Stack<>();
-            while (!stack.empty()) {
-                stack1.push(stack.pop());
+            //stack 3,2,1, offer 4
+            Stack<T> s1 = new Stack<>();
+            //s1: 1,2,3
+            while (!stack.isEmpty()) {
+                s1.push(stack.pop());
             }
-
-            stack = stack1;
+            //stack: 4
+            stack.push(item);
+            //stack 4,3,2,1
+            while(!s1.isEmpty()) {
+                stack.push(s1.pop());
+            }
         }
 
         return true;

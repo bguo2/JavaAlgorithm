@@ -1,11 +1,14 @@
 package com.example.console;
 
+import com.example.console.binarytree.BST;
+import org.modelmapper.internal.util.Assert;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.swing.plaf.synth.SynthEditorPaneUI;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.function.Consumer;
 
 @SpringBootApplication
@@ -17,8 +20,6 @@ public class ConsoleApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-
         String str1= new String("ABCD");
         String test = str1.substring(1,1);
 
@@ -37,11 +38,10 @@ public class ConsoleApplication implements CommandLineRunner {
         ListImpl<Integer>.Node<Integer> head = list.getHead();
         head = list.reverse(head);
         list.setHead(head);
+        System.out.println("iterate");
         list.iterate(myconsumer);
-
-        System.out.println("reverse in the middle");
-        list.reverse(3, 7);
-        list.iterate(myconsumer);
+        System.out.println("print reversely");
+        list.reversePrint(head);
 
         System.out.println("BST preorder");
         BST<Integer> bst = new BST<>(5);
@@ -94,7 +94,7 @@ public class ConsoleApplication implements CommandLineRunner {
         }
 
         System.out.println("BST delete 1");
-        bst.deleteNode(bst.getRoot(), 1);
+        BST<Integer>.TreeNode<Integer> t = bst.deleteNode(bst.getRoot(), 1);
         bst.inorder(bst.getRoot());
         System.out.println("BST delete 2");
         bst.add(bst.getRoot(), 1);
@@ -110,15 +110,26 @@ public class ConsoleApplication implements CommandLineRunner {
         result = Reverse.reverseNumber(-1234);
         String tmp = Reverse.reverseString("12345");
 
-        boolean match = StringPattern.isMatch("*aa", "aaa");
+        boolean match = StringPattern.isMatch("ab", ".*c");
+        match = StringPattern.isMatch("aab", "c*a*b");
+        match = StringPattern.isMatch("mississippi", "mis*is*p*.");
 
-        int[] result2 = MaxSlideWindow.maxSlidingWindow(new int[] {4,2,5,3,7,9}, 3);
-        System.out.println("end..."); ;
+        int[] arr = {10, 10, 20, 20, 20, 30};
+        int index = BinarySearch.Search(arr, 20);
+        Assert.isTrue(index == 2);
+        index = BinarySearch.Search1(arr, 20);
+        Assert.isTrue(index == 4);
 
-        int[] arr = {20};
-        int index = BinarySearch.Search(arr, 11);
+        index = BinarySearch.Search(arr, 5);
+        Assert.isTrue(index == 0);
+        index = BinarySearch.Search(arr, 15);
+        Assert.isTrue(index == 2);
+        index = BinarySearch.Search(arr, 25);
+        Assert.isTrue(index == 5);
+        index = BinarySearch.Search(arr, 35);
+        Assert.isTrue(index == 6);
 
-        index = BinarySearch.Search(arr, 11, 0, arr.length);
+        index = BinarySearch.Search(arr, 15, 0, arr.length);
 
         System.out.println("myQueue test.");
         MyQueue<Integer> queue = new MyQueue<>();
