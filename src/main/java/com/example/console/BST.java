@@ -232,7 +232,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
 
         public BSTInorderIterator(){
             TreeNode<T> current = root;
-            while(current != null){
+            while(current != null) {
                 stack.push(current);
                 current = current.left;
             }
@@ -248,7 +248,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
             TreeNode<T> node = stack.pop();
             if(node.right != null) {
                 TreeNode<T> current = node.right;
-                while (current != null){
+                while (current != null) {
                     stack.push(current);
                     current = current.left;
                 }
@@ -264,7 +264,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
 
     private class BSTPostorderIterator implements Iterator<T> {
         private Stack<TreeNode<T>> stack = new Stack<>();
-        private TreeNode<T> popNode = root;
+        private TreeNode<T> lastNode = root;
 
         public BSTPostorderIterator(){
             if(root != null)
@@ -282,11 +282,11 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
             while (!stack.empty()){
                 TreeNode<T> node = stack.peek();
                 boolean isLeaf = (node.left == null && node.right == null);
-                boolean finishedSubtree = (node.left == popNode || node.right == popNode);
+                boolean finishedSubtree = (node.left == lastNode || node.right == lastNode);
                 if(isLeaf || finishedSubtree){
                     //pop
-                    popNode = stack.pop();
-                    return popNode.data;
+                    lastNode = stack.pop();
+                    return lastNode.data;
                 }
                 else{
                     if(node.right != null)
