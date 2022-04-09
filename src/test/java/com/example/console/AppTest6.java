@@ -65,12 +65,12 @@ public class AppTest6 {
         ListImpl<Integer> list = new ListImpl<>();
         list.add(1);
         list.add(2);
-        ListImpl<Integer>.Node<Integer> end = list.add(3);
+        ListImpl.Node<Integer> end = list.add(3);
         list.add(4);
 
-        ListImpl<Integer>.Node<Integer> head = list.getHead();
+        ListImpl.Node<Integer> head = list.getHead();
 
-        ListImpl<Integer>.Node<Integer> newhead = list.reverse(head, end);
+        ListImpl.Node<Integer> newhead = list.reverse(head, end);
 
         list = new ListImpl<>();
         list.add(1);
@@ -78,9 +78,11 @@ public class AppTest6 {
         list.add(3);
         list.add(4);
         list.add(5);
+        list.add(6);
         head = list.getHead();
 
         newhead = list.reverseKGroup(head, 2);
+        assertTrue("", newhead.getData() == 2);
     }
 
     @Test

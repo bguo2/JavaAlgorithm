@@ -8,13 +8,17 @@ import java.util.function.Function;
 public class ListImpl<T extends Comparable<? super T>> {
 
     private Node<T> head = null, listLast = null;
-    public class Node<T> {
+    public static class Node<T> {
         public Node<T> next, previous;
         private T data;
         private Node(T value) {
             data = value;
         }
         public Node() {}
+
+        public T getData() {
+            return data;
+        }
     }
 
     public Node<T> getHead() {
@@ -158,30 +162,24 @@ public class ListImpl<T extends Comparable<? super T>> {
     public Node<T> reverseKGroup(Node<T> head, int k) {
         if(head == null || head.next == null || k < 1)
             return head;
-        Node<T> newStart = head;
-        Node<T> newEnd = head;
-        Node<T> p = head;
-        int i = 0;
-        Node<T> fake = new Node<T>();
+        Node<T> cur = head;
+        Node<T> fake = new Node<>();
         fake.next = head;
-        while(p != null) {
-            i++;
-            if(i % k == 0) {
-                Node<T> next = p.next;
-                Node<T> tmp = reverse(newStart, p);
-                if(newStart == head) {
-                    fake.next = tmp;
-                }
-                else {
-                    newEnd.next = tmp;
-                }
-                newEnd = newStart;
-                p = next;
-                newStart = next;
+        Node<T> pre = fake, start = head;
+        int count = 1;
+        while(cur != null) {
+            if(count % k == 0) {
+                Node<T> next = cur.next;
+                Node<T> tmpHead = reverse(start, cur);
+                pre.next = tmpHead;
+                pre = start;
+                start = next;
+                cur = start;
             }
             else {
-                p = p.next;
+                cur = cur.next;
             }
+            count++;
         }
 
         return fake.next;

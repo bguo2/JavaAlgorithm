@@ -35,7 +35,7 @@ public class ConsoleApplication implements CommandLineRunner {
             System.out.println(i);
         };
         list.iterate(myconsumer);
-        ListImpl<Integer>.Node<Integer> head = list.getHead();
+        ListImpl.Node<Integer> head = list.getHead();
         head = list.reverse(head);
         list.setHead(head);
         System.out.println("iterate");
