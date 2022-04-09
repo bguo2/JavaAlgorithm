@@ -15,6 +15,7 @@ public class MergeKSortedArray {
             this.curIndex = index;
         }
 
+        @Override
         public int compareTo(ArrayContainer target) {
             return this.array[curIndex] - target.array[target.curIndex];
         }

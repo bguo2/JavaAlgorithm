@@ -1,8 +1,6 @@
 package com.example.console;
 
-
 import java.util.*;
-
 
 interface SortedListIterator<E> extends Iterator<E> {
     E next();

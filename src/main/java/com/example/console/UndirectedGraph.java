@@ -40,8 +40,7 @@ public class UndirectedGraph {
 
         visited[v] = true;
 
-        for(Integer edgeVertex : edges[v]){
-
+        for(Integer edgeVertex : edges[v]) {
             if(!visited[edgeVertex]){
                 if(isCyclic(edgeVertex, visited, v))
                     return true;
