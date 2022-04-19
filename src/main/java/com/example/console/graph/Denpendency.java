@@ -1,4 +1,4 @@
-package com.example.console;
+package com.example.console.graph;
 
 import java.util.*;
 

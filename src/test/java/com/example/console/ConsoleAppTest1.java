@@ -1,6 +1,7 @@
 package com.example.console;
 
 import com.example.console.binarytree.BinaryTreePathSum;
+import com.example.console.graph.MinimumHeightTrees;
 import com.example.console.matrix.MinimumSteps;
 import com.example.console.recursion.RestoreIPAddress;
 import com.example.console.recursion.WordBreak;

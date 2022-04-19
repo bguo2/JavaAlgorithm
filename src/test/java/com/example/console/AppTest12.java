@@ -1,6 +1,9 @@
 package com.example.console;
 
+import com.example.console.binarytree.BinaryTreeLinked;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -55,5 +58,40 @@ public class AppTest12 {
         result = ThreeLargestNums.getSmallest3Products(arr);
         assertTrue(result[0] == -1 && result[1] == -1 && result[2] == 56 && result[3] == 8 && result[4] == 8 &&
                 result[5] == 6);
+    }
+
+    @Test
+    public void binaryTreeTest() {
+        BinaryTreeLinked.Node n7 = new BinaryTreeLinked.Node(7);
+        BinaryTreeLinked.Node n8 = new BinaryTreeLinked.Node(8);
+        BinaryTreeLinked.Node n6 = new BinaryTreeLinked.Node(6);
+        n6.left = n7;
+        n6.right = n8;
+        BinaryTreeLinked.Node n4 = new BinaryTreeLinked.Node(4);
+        BinaryTreeLinked.Node n5 = new BinaryTreeLinked.Node(5);
+        BinaryTreeLinked.Node n3 = new BinaryTreeLinked.Node(3);
+        n3.left = n6;
+        BinaryTreeLinked.Node n2 = new BinaryTreeLinked.Node(2);
+        n2.left = n4;
+        n2.right = n5;
+        BinaryTreeLinked.Node n1 = new BinaryTreeLinked.Node(1);
+        n1.left = n2;
+        n1.right = n3;
+
+        List<Integer> result = BinaryTreeLinked.getTreeResult(n1);
+        assertTrue(result.size() == 8 && result.get(0) == 1 && result.get(1) == 2 && result.get(2) == 4 &&
+                result.get(3) == 5 && result.get(4) == 7 && result.get(5) == 8 && result.get(6) == 6 &&
+                result.get(7) == 3);
+    }
+
+    @Test
+    public void socialDistanceTest() {
+        long[] S = {2, 6};
+        long count = CafeteriaSocialDistance.getMaxAdditionalDinersCount(10, 1, 2, S);
+        assertTrue(count == 3);
+
+        S = new long[] {11, 6, 14};
+        count = CafeteriaSocialDistance.getMaxAdditionalDinersCount(15, 2, 3, S);
+        assertTrue(count == 1);
     }
 }

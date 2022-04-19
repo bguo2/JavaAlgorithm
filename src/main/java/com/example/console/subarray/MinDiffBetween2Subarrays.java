@@ -1,5 +1,7 @@
 package com.example.console.subarray;
 
+import java.util.Arrays;
+
 //Given an integer array arr[], the task is to split the given array into two contiguous subarrays such that the difference between
 // their sum is minimum.
 //
@@ -16,23 +18,30 @@ public class MinDiffBetween2Subarrays {
     public static int minDiffSubArray(int[] input) {
         if(input == null || input.length < 1)
             return -1;
+/*
         int[] leftSum = new int[input.length];
         leftSum[0] = input[0];
+        int sum = input[0];
         for(int i = 1; i < input.length; i++) {
             leftSum[i] = leftSum[i-1] + input[i];
-        }
-
-        int[] rightSum = new int[input.length];
-        rightSum[input.length - 1] = input[input.length - 1];
-        for(int i = input.length - 2; i >= 0; i--) {
-            rightSum[i] = rightSum[i+1] + input[i];
+            sum += input[i];
         }
 
         int result = Integer.MAX_VALUE;
         for(int i = 0; i < input.length - 1; i++) {
-            int diff = Math.abs(leftSum[i] - rightSum[i+1]);
+            int diff = Math.abs(leftSum[i] - (sum - leftSum[i]));
             result = Math.min(result, diff);
         }
+ */
+        int result = Integer.MAX_VALUE;
+        int sum = Arrays.stream(input).sum();
+        int curSum = 0;
+        for(int i = 0; i < input.length - 1; i++) {
+            curSum += input[i];
+            int diff = Math.abs(curSum - (sum - curSum));
+            result = Math.min(result, diff);
+        }
+
         return result;
     }
 }

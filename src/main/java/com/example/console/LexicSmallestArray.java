@@ -28,7 +28,7 @@ then we apply the same procedure from the very next starting position i.e., a2, 
 a1 position. So we keep applying the same process until k becomes 0.
      */
 
-    public static void minimizeWithKSwaps(int arr[], int n, int k) {
+    public static void minimizeWithKSwaps(int arr[], int k) {
         for(int i = 0; i < arr.length - 1; i++) {
             int pos = i;
             for(int j = i+1; j < arr.length; j++) {

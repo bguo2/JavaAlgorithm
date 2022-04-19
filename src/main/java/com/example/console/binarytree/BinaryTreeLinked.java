@@ -1,6 +1,8 @@
 package com.example.console.binarytree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 //Populating Next Right Pointers in Each Node II
@@ -46,11 +48,11 @@ import java.util.Queue;
 // node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the
 // end of each level.
 public class BinaryTreeLinked {
-    class Node {
-        public int val;
+    public static class Node {
+        int val;
         public Node left;
         public Node right;
-        public Node next;
+        Node next;
 
         public Node() {}
 
@@ -117,5 +119,62 @@ public class BinaryTreeLinked {
         }
 
         return root;
+    }
+
+//print out binary tree
+//      1
+//      /\
+//     2  3
+//    /\   \
+//   4  5   6
+//          /\
+//         7  8
+//return [1,2,4,5,7,8,6,3]
+    public static List<Integer> getTreeResult(Node root) {
+        if(root == null) {
+            return new ArrayList<>();
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        Queue<Node> leftNodes = new LinkedList<>();
+        Queue<Node> leafNodes = new LinkedList<>();
+        Queue<Node> rightNodes = new LinkedList<>();
+        Node lastLeftNode = null;
+
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0; i < size;  i++) {
+                Node node = queue.poll();
+                if(i == 0 && lastLeftNode == null) {
+                    leftNodes.offer(node);
+                    if(node.left == null)
+                        lastLeftNode = node;
+                }
+                else if(node.left == null && node.right == null)
+                    leafNodes.offer(node);
+                else if(i == size - 1) {
+                    ((LinkedList)rightNodes).addFirst(node);
+                }
+
+                if(node.left != null)
+                    queue.offer(node.left);
+                if(node.right != null)
+                    queue.offer(node.right);
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        appendResult(leftNodes, result);
+        appendResult(leafNodes, result);
+        appendResult(rightNodes, result);
+        return result;
+    }
+
+    private static void appendResult(Queue<? extends Node> queue, List<? super Integer> result) {
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            result.add(node.val);
+        }
     }
 }

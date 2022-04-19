@@ -35,7 +35,7 @@ public class AppTest11 {
         count = KmoduleSubSet.countSubsetWithMem(5, new int[] { 10 });
         assertTrue(count == 1);
         //{10}, {5}, {5}, {10, 5}, {10, 5}, {5,5,}, {10,5,5}
-        count = KmoduleSubSet.countSubsetWithMem(5, new int[] { 10, 5, 5 });
+        count = KmoduleSubSet.countSubsetWithMem(5, new int[] { -10, -5, -5 });
         assertTrue(count == 7);
         //{10}, {5}, {5}, {10, 5}, {10, 5}, {5,5,}, {10,5,5}, | {11, 9}
         count = KmoduleSubSet.countSubsetWithMem(5, new int[] { 10, 5, 11, 9, 5 });

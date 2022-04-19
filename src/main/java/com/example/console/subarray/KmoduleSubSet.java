@@ -38,7 +38,7 @@ public class KmoduleSubSet {
         return count0 + count;
     }
 
-    //module of K is 0-k-1
+    //module of K is 0-k-1, sum < 0: no good
     public static long countSubsetWithMem(int k, int[] input) {
         int[][] mem = new int[input.length+1][k];
         return countSubsetSumWithMem(k, input, 0, 0, mem) - 1;
@@ -52,8 +52,8 @@ public class KmoduleSubSet {
         }
         if(mem[start][sum] > 0)
             return mem[start][sum];
-        int count0 = countSubsetSum(k, input, start+1, (sum+input[start])%k);
-        int count = countSubsetSum(k, input, start+1, sum%k);
+        int count0 = countSubsetSumWithMem(k, input, start+1, (sum+input[start])%k, mem);
+        int count = countSubsetSumWithMem(k, input, start+1, sum%k, mem);
         mem[start][sum] = count0 + count;
         return mem[start][sum];
     }

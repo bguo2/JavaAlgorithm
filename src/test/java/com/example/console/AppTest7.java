@@ -1,5 +1,6 @@
 package com.example.console;
 
+import com.example.console.graph.ComponentCycle;
 import com.example.console.subarray.MaxSubArray;
 import org.junit.Test;
 import org.junit.runner.RunWith;

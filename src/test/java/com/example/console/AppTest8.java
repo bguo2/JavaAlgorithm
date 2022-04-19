@@ -81,9 +81,15 @@ public class AppTest8 {
 
     @Test
     public void minDiffSubArrayTest() {
-        int[] input = new int[] {7, 10, 3, 5, 10};
+        int[] input = new int[] {7, 10, 1, 8, 10};
         int result = MinDiffBetween2Subarrays.minDiffSubArray(input);
+        Assert.assertTrue(result == 0);
+        input = new int[] {7, 10, 3, 5, 10};
+        result = MinDiffBetween2Subarrays.minDiffSubArray(input);
         Assert.assertTrue(result == 1);
+        input = new int[] {17, 1, 1, 3, 10};
+        result = MinDiffBetween2Subarrays.minDiffSubArray(input);
+        Assert.assertTrue(result == 2);
     }
 
     @Test
