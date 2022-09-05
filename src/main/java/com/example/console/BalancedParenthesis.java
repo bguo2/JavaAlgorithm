@@ -73,7 +73,8 @@ public class BalancedParenthesis {
                 for(int i = 0; i < s.length(); i++)
                 {
                     // we only try to remove left or right paren
-                    if (s.charAt(i) != '(' && s.charAt(i) != ')') continue;
+                    if (s.charAt(i) != '(' && s.charAt(i) != ')')
+                        continue;
 
                     String tmp = s.substring(0, i) + s.substring(i+1);
                     if(!visited.contains(tmp))

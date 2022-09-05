@@ -54,12 +54,9 @@ public class SwimInRisingWater {
         boolean[][] visited = new boolean[rows][cols];
         int[] dx = {0, 0, -1, 1};
         int[] dy = {-1, 1, 0, 0};
-        PriorityQueue<Node> queue = new PriorityQueue<>(new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
+        PriorityQueue<Node> queue = new PriorityQueue<>((o1, o2) -> {
                 return o1.minWaitTime - o2.minWaitTime;
-            }
-        });
+            });
 
         queue.offer(new Node(0, 0, 0));
         int min = 0;

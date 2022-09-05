@@ -15,8 +15,8 @@ public class WordPatternMatch {
         return helper(pattern, str, 0, 0, map);
     }
 
-    private boolean helper(String pattern, String str, int i, int j, HashMap<Character, String> map){
-        if(i==pattern.length() && j==str.length()){
+    private boolean helper(String pattern, String str, int i, int j, HashMap<Character, String> map) {
+        if(i==pattern.length() && j==str.length()) {
             return true;
         }
 
@@ -24,14 +24,14 @@ public class WordPatternMatch {
             return false;
 
         char c = pattern.charAt(i);
-        for(int k=j+1; k<=str.length(); k++){
+        for(int k=j+1; k<=str.length(); k++) {
             String sub = str.substring(j, k);
-            if(!map.containsKey(c) && !map.containsValue(sub)){
+            if(!map.containsKey(c) && !map.containsValue(sub)) {
                 map.put(c, sub);
                 if(helper(pattern, str, i+1, k, map))
                     return true;
                 map.remove(c);
-            }else if(map.containsKey(c) && map.get(c).equals(sub)){
+            } else if(map.containsKey(c) && map.get(c).equals(sub)) {
                 if(helper(pattern, str, i+1, k, map))
                     return true;
             }

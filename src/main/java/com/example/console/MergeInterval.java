@@ -30,12 +30,9 @@ import java.util.List;
 public class MergeInterval {
     public int[][] merge(int[][] intervals) {
         //Arrays.sort(intervals, (e1, e2) -> e1[0] - e2[0]);
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] e1, int[] e2) {
+        Arrays.sort(intervals, (int[] e1, int[] e2) -> {
                 return e1[0] - e2[0];
-            }
-        });
+            });
 
         List<int[]> result = new ArrayList<>();
         int[] t = intervals[0];

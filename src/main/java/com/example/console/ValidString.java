@@ -43,8 +43,17 @@ public class ValidString {
             index++;
         }
         //frequency diff must be 1 and its freq must be 1 (can be deleted with 1 char)
-        if((values[0] == 1 || values[1] == 1) && Math.abs(keys[0]-keys[1]) == 1)
+        //aaabb 3:1. 2:1, aaabbbb 3:1, 4:1 => yes
+        if(map.size() == 2 && (values[0] == 1 || values[1] == 1) && Math.abs(keys[0]-keys[1]) == 1)
             return "YES";
+        //aaabbbcc 3:2 2:1 => no  aaabbbcccc 3:2 4:1 =>yes
+        if(map.size() > 2) {
+            if(Math.abs(keys[0]-keys[1]) != 1)
+                return "NO";
+            if((values[0] == 1 && keys[0] > keys[1]) || (values[1] == 1 && keys[1] > keys[0])) {
+                return "YES";
+            }
+        }
         return "NO";
         /*
         int first = 0, firstKey=0, second=0, secondKey=0, count = 0;

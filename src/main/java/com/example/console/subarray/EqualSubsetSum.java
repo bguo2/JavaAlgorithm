@@ -47,7 +47,7 @@ public class EqualSubsetSum {
         int sum = Arrays.stream(nums).sum();
         if(sum % 2 != 0)
             return false;
-        sum = sum /2;
+        sum = sum / 2;
         return canPartition(nums, nums.length - 1, sum);
     }
 

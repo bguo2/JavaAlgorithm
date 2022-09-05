@@ -13,7 +13,7 @@ public class FindKSmallest {
         PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
 
         int n = k > source.length ? source.length: k;
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++) {
             queue.offer(source[i]);
         }
 
@@ -31,7 +31,7 @@ public class FindKSmallest {
 
         int[] result = new int[n];
         int i = n - 1;
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             result[i--] = queue.poll();
         }
 

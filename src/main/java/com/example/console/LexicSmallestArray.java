@@ -6,7 +6,6 @@ public class LexicSmallestArray {
     of k consecutive swaps.
 Examples :
 
-
 Input: arr[] = {7, 6, 9, 2, 1}
         k = 3
 Output: arr[] = {2, 7, 6, 9, 1}
@@ -35,11 +34,12 @@ a1 position. So we keep applying the same process until k becomes 0.
                 if(j-i > k) {
                     break;
                 }
-                // Find the minimum value from i+1 to max k or n
+                // Find the minimum value from i+1 to max i+k or n
                 if(arr[j] < arr[pos])
                     pos = j;
             }
 
+            //swap pos-i times
             int tmp;
             for(int j = pos; j > i; j--) {
                 tmp = arr[j];

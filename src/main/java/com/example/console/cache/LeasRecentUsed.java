@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 //lease recently used
 public class LeasRecentUsed<K,V> {
-    class Node<V>{
+    class Node<V> {
         V value;
         Node prev;
         Node next;
@@ -38,17 +38,16 @@ public class LeasRecentUsed<K,V> {
     }
 
     public void put(K key, V value) {
-        if(map.containsKey(key)){
+        if(map.containsKey(key)) {
             Node t = map.get(key);
             t.value = value;
 
             //move to tail
             removeNode(t);
             offerNode(t);
-        }else{
+        } else {
             if(map.size()>=cap){
                 //delete head
-                map.remove(key);
                 removeNode(head);
             }
 
@@ -70,6 +69,7 @@ public class LeasRecentUsed<K,V> {
             n.next.prev = n.prev;
         }else{
             tail = n.prev;
+            tail.next = null;
         }
     }
 

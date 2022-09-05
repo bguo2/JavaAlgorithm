@@ -1,4 +1,4 @@
-package com.example.console;
+package com.example.console.palimdrome;
 
 import java.util.ArrayList;
 import java.util.HashMap;

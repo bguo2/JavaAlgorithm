@@ -66,7 +66,8 @@ public class BinaryTreeLinked {
             right = _right;
             next = _next;
         }
-    };
+    }
+
     //use O(1) space
     //我们建立一个dummy结点来指向每层的首结点的前一个结点，然后指针cur用来遍历这一层，我们实际上是遍历一层，然后连下一层的next，
     // 首先从根结点开始，如果左子结点存在，那么cur的next连上左子结点，然后cur指向其next指针；如果root的右子结点存在，那么cur的next连上右子结点，

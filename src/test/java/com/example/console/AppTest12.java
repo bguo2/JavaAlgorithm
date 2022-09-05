@@ -1,6 +1,10 @@
 package com.example.console;
 
 import com.example.console.binarytree.BinaryTreeLinked;
+import com.example.console.binarytree.BstRangeSum;
+import com.example.console.binarytree.DuplicatedSubTree;
+import com.example.console.binarytree.TreeNode;
+import com.example.console.recursion.OddEvenJump;
 import org.junit.Test;
 
 import java.util.List;
@@ -93,5 +97,97 @@ public class AppTest12 {
         S = new long[] {11, 6, 14};
         count = CafeteriaSocialDistance.getMaxAdditionalDinersCount(15, 2, 3, S);
         assertTrue(count == 1);
+    }
+
+    @Test
+    public void BstRangeSumTest() {
+        TreeNode node3 = new TreeNode(3, null, null);
+        TreeNode node7 = new TreeNode(7, null, null);
+        TreeNode node5 = new TreeNode(5, node3, node7);
+        TreeNode node18 = new TreeNode(18, null, null);
+        TreeNode node15 = new TreeNode(15, null, node18);
+        TreeNode root = new TreeNode(10, node5, node15);
+
+        int sum = BstRangeSum.rangeSumBST(root, 7, 15);
+        assertTrue(sum == 32);
+        int sum1 = BstRangeSum.getRangeSum(root, 7, 15);
+        assertTrue(sum1 == 32);
+
+        sum = BstRangeSum.rangeSumBST(root, -1, 8);
+        assertTrue(sum == 15);
+        sum1 = BstRangeSum.getRangeSum(root, -1, 8);
+        assertTrue(sum1 == 15);
+
+        sum = BstRangeSum.rangeSumBST(root, 4, 16);
+        assertTrue(sum == 37);
+        sum1 = BstRangeSum.getRangeSum(root, 4, 16);
+        assertTrue(sum1 == 37);
+    }
+
+    @Test
+    public void findDuplicatedSubTree() {
+        DuplicatedSubTree tree = new DuplicatedSubTree();
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node2 = new TreeNode(2, node4, null);
+        TreeNode root4 = new TreeNode(4);
+        TreeNode node3 = new TreeNode(3, node2, node4);
+        TreeNode root = new TreeNode(1, node2, node3);
+        List<TreeNode> result = tree.findDuplicateSubtrees(root);
+    }
+
+    @Test
+    public void oddEvenJumpTest() {
+        OddEvenJump jump = new OddEvenJump();
+        int[] arr = { 10,13,12,14,15};
+        int count = jump.oddEvenJumps(arr);
+        assertTrue(count == 2);
+
+        arr = new int[] {2,3,1,1,4};
+        count = jump.oddEvenJumps(arr);
+        assertTrue(count == 3);
+
+        arr = new int[] {5,1,3,4,2};
+        count = jump.oddEvenJumps(arr);
+        assertTrue(count == 3);
+    }
+
+    @Test
+    public void subsetTest() {
+        Subset test = new Subset();
+        int[] nums = {1,2,2};
+        test.subsetsWithDup(nums);
+
+    }
+
+    @Test
+    public void sortOnTest() {
+        int[] input = new int[] {2, 1, 0};
+        int[] result = CountSorting.sort(input);
+        assertTrue(result[0] == 0 && result[1] == 1 && result[2] == 2);
+
+        input = new int[] {2, 0, 1, 1, 1};
+        result = CountSorting.sort(input);
+        assertTrue(result[0] == 0 && result[1] == 1 && result[2] == 1 && result[3] == 1 && result[4] == 2);
+
+        input = new int[] {3, 2, 2, 1, 1, 1};
+        result = CountSorting.sort(input);
+        assertTrue(result[0] == 1 && result[1] == 1 && result[2] == 1 && result[3] == 2 && result[4] == 2 && result[5] == 3);
+    }
+
+    @Test
+    public void notifTest() {
+        int[] arr = {2, 3, 4, 2, 3, 6, 8, 4, 5};
+        int result = CountSorting.activityNotifications(arr, 5);
+        assertTrue(result == 2);
+        result = CountSorting.activityNotifications(arr, 3);
+        assertTrue(result == 2);
+
+        arr = new int[] {1, 4, 1, 2, 7, 1, 2, 5, 3, 6};
+        double median = CountSorting.getMedian(arr, 10);
+        assertTrue(median == 2.5);
+        median = CountSorting.getMedian(arr, 5);
+        assertTrue(median == 2.0);
+        median = CountSorting.getMedian(arr, 6);
+        assertTrue(median == 1.5);
     }
 }

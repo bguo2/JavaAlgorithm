@@ -68,8 +68,8 @@ public class FlowerPlantingWithNoAdjacent {
                 color[ans[nbr]] = true;
             }
 
-            for(int j=1; j<=4; j++){
-                if(color[j] == false){
+            for(int j=1; j<=4; j++) {
+                if(color[j] == false) {
                     ans[i] = j;
                     break;
                 }

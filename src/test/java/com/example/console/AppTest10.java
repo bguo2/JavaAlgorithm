@@ -86,6 +86,8 @@ public class AppTest10 {
         assertTrue("", isValid.equals("NO"));
         isValid = ValidString.isValid("aabbccddeefghi");
         assertTrue("", isValid.equals("NO"));
+        isValid = ValidString.isValid("aaabbbcc");
+        assertTrue("", isValid.equals("NO"));
     }
 
     @Test

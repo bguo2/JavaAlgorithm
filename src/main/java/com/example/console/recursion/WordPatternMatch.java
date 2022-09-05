@@ -32,7 +32,7 @@ public class WordPatternMatch {
             return false;
 
         char c = pattern.charAt(i);
-        for(int k=j; k<str.length(); k++){
+        for(int k=j; k<str.length(); k++) {
             String sub = str.substring(j, k+1);
             if(map.containsKey(c) && map.get(c).equals(sub)) {
                 if(helper(pattern, str, i+1, k+1, map, set))
@@ -85,13 +85,16 @@ public class WordPatternMatch {
             return false;
         for(int i = 0; i < words.length; i++) {
             char c = pattern.charAt(i);
+            //mapped: must exist in both maps
             if(charMap.containsKey(c)) {
-                if(!charMap.get(c).equals(words[i]))
+                String value = charMap.get(c);
+                if(!wordMap.containsKey(value))
                     return false;
-                if(!wordMap.containsKey(charMap.get(c)))
+                if(wordMap.get(value) == null || !wordMap.get(value).equals(c))
                     return false;
             }
             else {
+                //exists in wordMap but not exists in charMap
                 if(wordMap.containsKey(words[i]))
                     return false;
                 charMap.put(c, words[i]);

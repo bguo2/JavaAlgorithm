@@ -46,9 +46,8 @@ public class FrogJump {
         //brute force
         //return canCross(stones, 1, 1);
 
-        int[][] memo = new int[stones.length][stones.length];
-        Arrays.fill(memo, -1);
-        return canCross(stones, 1, 1, memo) == 1;
+        Boolean[][] memo = new Boolean[stones.length][stones.length];
+        return canCross(stones, 1, 1, memo);
     }
 
     //O(2^^n)
@@ -64,20 +63,20 @@ public class FrogJump {
     }
 
     //memorize, O(n^^2)
-    private int canCross(int[] stones, int start, int lastStep, int[][] memo) {
-        if(memo[start][lastStep] >= 0)
-            return memo[start][lastStep];
-        for(int i = start+1; i < stones.length; i++) {
-            int step = stones[i] - stones[start];
-            if(step >= lastStep-1 && step <= lastStep + 1) {
-                if(canCross(stones, i, step)) {
-                    memo[start][step] = 1;
-                    return 1;
+    private boolean canCross(int[] stones, int index, int step, Boolean[][] mem) {
+        if(mem[index][step] != null)
+            return mem[index][step];
+        for(int i = index+1; i < stones.length; i++) {
+            int nextStep = stones[i] - stones[index];
+            if(nextStep >= step-1 && nextStep <= step + 1) {
+                if(canCross(stones, i, nextStep, mem)) {
+                    mem[index][nextStep] = true;
+                    return true;
                 }
             }
         }
 
-        memo[start][lastStep] = (start == stones.length - 1 ? 1:0);
-        return memo[start][lastStep];
+        mem[index][step] = (index == stones.length - 1);
+        return mem[index][step];
     }
 }

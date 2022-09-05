@@ -1,6 +1,6 @@
 package com.example.console;
 
-import com.example.console.DynamicPg.ShortestDistToAllBuildings;
+import com.example.console.matrix.ShortestDistToAllBuildings;
 import com.example.console.graph.ShortestPathGraph;
 import com.example.console.subarray.MinLargestSumSubArrays;
 import com.example.console.subarray.MinSubArrayWithGreaterThanValue;
@@ -50,16 +50,16 @@ public class AppTest2 {
     @Test
     public void minWindowSubstringTest()
     {
-        String S = "ADOBECODEBANC", T = "ABC";
+        String S = "ADOBECBADEBANC", T = "ABC";
         String result = MinWindowSubstring.getMinWindowSubstring(S, T);
-        assertTrue(result.equals("BANC"));
+        assertTrue(result.equals("CBA"));
         S = "ADOABECODEBANC";
         result = MinWindowSubstring.getMinWindowSubstring(S, T);
         assertTrue(result.equals("ABEC"));
-        S = "ADOABECODEBANC";
+        S = "ADOABECODEABANC";
         T = "AABC";
         result = MinWindowSubstring.getMinWindowSubstring(S, T);
-        assertTrue(result.equals("ADOABEC"));
+        assertTrue(result.equals("ABANC"));
 
         S = "a";
         T = "a";
@@ -69,6 +69,11 @@ public class AppTest2 {
         T = "aa";
         result = MinWindowSubstring.getMinWindowSubstring(S, T);
         assertTrue(result.equals("aa"));
+
+        S = "thisisateststring";
+        T = "tist";
+        result = MinWindowSubstring.getMinWindowSubstring(S, T);
+        assertTrue(result.equals("tstri"));
     }
 
     @Test

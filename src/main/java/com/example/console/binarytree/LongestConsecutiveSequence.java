@@ -97,34 +97,50 @@ public class LongestConsecutiveSequence {
     //      1   3
     //Output: 3
     //Explanation: The longest consecutive path is [1, 2, 3] or [3, 2, 1].
-    public int longestConsecutiveII(TreeNode root) {
-        int[] max = new int[1];
-        helper1(root, max);
-        return max[0];
+    int max = 0;
+    public int longestConsecutive1(TreeNode root) {
+        getLongestConsecutive(root);
+        return max;
     }
 
-    private int[] helper1(TreeNode root, int[] max) {
-        if(root == null)
-            return new int[] {0, 0};
-        int[] right = helper1(root.right, max);
-        int[] left = helper1(root.left, max);
-        int inc = 1, dec = 1;
+    private int[] getLongestConsecutive(TreeNode root) {
+        // returns [longest_decreasing_length_from_root, longest_increasing_length_from_root]
+        if (root == null)
+            return new int[] {0, 0}; //inc, desc
+        int[] left = getLongestConsecutive(root.left);
+        int[] right = getLongestConsecutive(root.right);
 
-        if(root.left != null) {
-            if(root.val == root.left.val + 1)
-                dec = left[1] + 1;
-            else if(root.val == root.left.val - 1)
-                inc = left[0] + 1;
+        //current node
+        if(root.left != null && root.val + 1 == root.left.val) {
+            left[0]++;
+        }
+        else {
+            left[0] = 1;
         }
 
-        if(root.right != null) {
-            if(root.val == root.right.val + 1)
-                dec = Math.max(dec, right[1] + 1);
-            else if(root.val == root.right.val - 1)
-                inc = Math.max(inc, right[0] + 1);
+        if(root.left != null && root.val - 1 == root.left.val) {
+            left[1]++;
+        }
+        else {
+            left[1] = 1;
         }
 
-        max[0] = Math.max(max[0], inc+dec-1);
-        return new int[] {inc, dec};
+
+        if(root.right != null && root.val + 1 == root.right.val) {
+            right[0]++;
+        }
+        else {
+            right[0] = 1;
+        }
+
+        if(root.right != null && root.val - 1 == root.right.val) {
+            right[1]++;
+        }
+        else {
+            right[1] = 1;
+        }
+        max = Math.max(max, Math.max(left[0]+right[1]-1, left[1]+right[0])-1);
+
+        return new int[] { Math.max(left[0], right[0]), Math.max(left[1], right[1]) };
     }
 }

@@ -36,12 +36,12 @@ public class WordLadder {
                 return node.stepNum;
             char[] arr = node.word.toCharArray();
             int curStep = node.stepNum;
-            for(int i = 0; i < arr.length; i++){
+            for(int i = 0; i < arr.length; i++) {
                 char tmp = arr[i];
-                for(char c = 'a'; c <= 'z'; c++){
+                for(char c = 'a'; c <= 'z'; c++) {
                     arr[i] = c;
                     String word = new String(arr);
-                    if(wordDict.contains(word)){
+                    if(wordDict.contains(word)) {
                         curStep++;
                         if(word.equals(endWord))
                             return curStep;

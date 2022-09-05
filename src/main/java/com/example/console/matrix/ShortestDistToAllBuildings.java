@@ -1,4 +1,4 @@
-package com.example.console.DynamicPg;
+package com.example.console.matrix;
 
 import java.util.LinkedList;
 import java.util.Queue;

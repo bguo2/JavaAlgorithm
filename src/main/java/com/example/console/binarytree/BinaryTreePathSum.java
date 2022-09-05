@@ -45,6 +45,9 @@ public class BinaryTreePathSum {
     }
 
     private void pathSum(TreeNode root, int sum, List<List<Integer>> result, List<Integer> tmp) {
+        if(root == null)
+            return;
+
         if(root.left == null && root.right == null && root.value == sum) {
             List<Integer> t1 = new ArrayList<>(tmp);
             t1.add(root.value);
@@ -95,7 +98,7 @@ public class BinaryTreePathSum {
     //    5
     //  /   \
     // 2     11
-    //      /   \
+    //      /  \
     //    6     14
     //   /
     //  3
@@ -119,7 +122,7 @@ public class BinaryTreePathSum {
         prefix.add(root.value);
         found[0] = findTarget(target, prefix);
         findPath(root.left, prefix, target, found);
-        findPath(root.right, prefix , target, found);
+        findPath(root.right, prefix, target, found);
         prefix.remove(prefix.size() - 1);
     }
 

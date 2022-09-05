@@ -26,6 +26,9 @@ public class PalidromSubStrings {
         for(int i = 0; i < dp.length; i++)
             dp[i][i] = true;
 
+        //dp
+        // g chars selected
+        // i: left side; j - right side, e.g. a...a str[i]==str[j], if str[i+1]==str[j-1], then it is
         for(int g = 1; g < str.length; g++) {
             for(int i = 0, j = g; j < str.length; i++, j++) {
                 //2 chars: if str[i] = str[j]: then true
@@ -46,14 +49,6 @@ public class PalidromSubStrings {
         return count;
     }
 
-    //dp
-    // g chars selected
-    // i: row; j - column
-    //   a b  b    a
-    // a a ab abb  abba
-    // b   b  bb   bba
-    // b      b    ba
-    // a           a
     public static int countSubstringsDp(String s) {
         char[] str = s.toCharArray();
         boolean[][] dp = new boolean[str.length][str.length];

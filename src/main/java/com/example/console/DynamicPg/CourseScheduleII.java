@@ -66,93 +66,43 @@ public class CourseScheduleII {
         return (index == numCourses) ? order : new int[0];
     }
 
-    //tasks and its dependencies, output the scheduling order, if there is cycular, return empty;
+    //tasks and its dependencies, output the scheduling order, if there is cyclic, return empty;
     //input is T1:[], T2: [T1, T3], T3: [T2, T1];
-    //return the order of sceduled tasks
-    public static class Task {
-        public String taskToRemove;
-        public Set<String> dependencies;
-    }
+    //return the order of scheduled tasks
+    // use Map<String, Integer> to calculate the indegree, Queue<String> for no-dependencies
+    //List<String> order: if order size == task size, then no circular
 
-    public static List<String> findOrder(List<Task> tasks) {
+    public static List<String> findOrder1(Map<String, Set<String>> depMap) {
+        Queue<String> queue = new LinkedList<>();
         List<String> result = new ArrayList<>();
-        if(tasks == null || tasks.size() == 0)
-            return result;
-        Queue<String> noDepends = new LinkedList<>();
-        Iterator<Task> iterator = tasks.iterator();
-        while (iterator.hasNext()) {
-            Task task = iterator.next();
-            if(task.dependencies == null || task.dependencies.isEmpty()) {
-                noDepends.offer(task.taskToRemove);
-                iterator.remove();
+        for(Map.Entry<String, Set<String>> entry : depMap.entrySet()) {
+            if(entry.getValue().isEmpty()) {
+                queue.offer(entry.getKey());
             }
         }
 
-        while (!noDepends.isEmpty()) {
-            String taskToRemove = noDepends.poll();
-            result.add(taskToRemove);
-            Iterator<Task> iter = tasks.iterator();
-            while(iter.hasNext()) {
-                Task task = iter.next();
-                Set<String> depends = task.dependencies;
-                if(depends.contains(taskToRemove)) {
-                    depends.remove(taskToRemove);
-                    if(depends.isEmpty()) {
-                        noDepends.offer(task.taskToRemove);
-                        iter.remove();
-                    }
+        while (!queue.isEmpty()) {
+            String noDepTask = queue.poll();
+            result.add(noDepTask);
+
+            depMap.remove(noDepTask);
+            Iterator<Map.Entry<String, Set<String>>> iterator = depMap.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, Set<String>> entry = iterator.next();
+                if(!entry.getValue().contains(noDepTask)) {
+                    continue;
+                }
+
+                entry.getValue().remove(noDepTask);
+                if(entry.getValue().isEmpty()) {
+                    queue.offer(entry.getKey());
+                    iterator.remove();
                 }
             }
         }
 
-        if(tasks.isEmpty())
-            return result;
-        return new ArrayList<>();
-    }
-
-    public static List<String> findOrder1(String[] tasks0, List<String>[] dependencies) {
-        Map<String, Set<String>> taskDependMap = new HashMap<>();
-        List<String> result = new ArrayList<>();
-        List<String> tasks = new LinkedList<>(Arrays.asList(tasks0));
-        for(int i = 0; i < tasks.size(); i++) {
-            String taskToRemove = tasks.get(i);
-            List<String> depends = dependencies[i];
-            Set<String> set = new HashSet<>();
-            if(depends != null) {
-                set.addAll(depends);
-            }
-            taskDependMap.put(taskToRemove, set);
-        }
-
-        Queue<String> noDepends = new LinkedList<>();
-        for(int i = 0; i < tasks.size(); i++) {
-            Set<String> depends = taskDependMap.get(tasks.get(i));
-            if(depends == null || depends.isEmpty()) {
-                noDepends.offer(tasks.get(i));
-                taskDependMap.remove(tasks.get(i));
-                tasks.remove(i);
-                i--;
-            }
-        }
-
-        while (!noDepends.isEmpty()) {
-            String noDependTask = noDepends.poll();
-            taskDependMap.remove(noDependTask);
-            result.add(noDependTask);
-            for(int i = 0; i < tasks.size(); i++) {
-                Set<String> dependedTasks = taskDependMap.get(tasks.get(i));
-                if(dependedTasks != null && noDependTask.contains(noDependTask)) {
-                    dependedTasks.remove(noDependTask);
-                }
-                if(dependedTasks == null || dependedTasks.isEmpty()) {
-                    noDepends.add(tasks.get(i));
-                    tasks.remove(i);
-                    i--;
-                }
-            }
-        }
-
-        if(tasks.isEmpty())
+        //all dependencies are removed, no cycle
+        if(depMap.size() == 0)
             return result;
         return new ArrayList<>();
     }

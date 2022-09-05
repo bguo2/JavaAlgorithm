@@ -35,6 +35,7 @@ public class MinWindowSubstring {
             if(total < t.length())
                 continue;
             c = s.charAt(start);
+            //Try to minimize the window
             while(!map.containsKey(c) || tmpMap.get(c) > map.get(c)) {
                 if(map.containsKey(c) && tmpMap.get(c) > map.get(c)) {
                     if(tmpMap.get(c) == 1)
@@ -49,6 +50,7 @@ public class MinWindowSubstring {
             if(min > i - start +1) {
                 result = s.substring(start, i+1);
                 min = result.length();
+                //matched: move the index
                 c = s.charAt(start);
                 if(tmpMap.get(c) == 1)
                     tmpMap.remove(c);

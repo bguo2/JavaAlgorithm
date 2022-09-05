@@ -1,10 +1,9 @@
-package com.example.console;
+package com.example.console.palimdrome;
 
 //find the largest palindrome of a number that can be obtained by multiplying two 3 digit numbers
 //since 999*999=998001
 //so the largest Palindrome number won't be greater than 998001
 public class PalindromeWith3Digits {
-
     public int getLargestNumber() {
         int n = 998;
         boolean found = false;

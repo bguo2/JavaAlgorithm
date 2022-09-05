@@ -20,6 +20,9 @@ public class ConsoleApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+    }
+
+    private void test() throws Exception {
         String str1= new String("ABCD");
         String test = str1.substring(1,1);
 
@@ -150,6 +153,6 @@ public class ConsoleApplication implements CommandLineRunner {
             System.out.println(stack.pop());
         }
 
-        //System.exit(0);
+        System.exit(0);
     }
 }

@@ -71,7 +71,8 @@ public class WordSearch1 {
                 if (!node.containsKey(c)) {
                     t = new TrieNode();
                     node.put(c, t);
-                } else
+                }
+                else
                     t = node.get(c);
                 node = t.children;
                 if (i == word.length() - 1)

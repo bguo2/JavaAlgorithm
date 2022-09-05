@@ -29,7 +29,7 @@ public class TwoSum {
                 if(map.containsKey(nums[i])) {
                     if(map.get(nums[i]) == 0)
                         count++;
-                    //count alreay, set to 1
+                    //count already, set to 1
                     map.put(nums[i], 1);
                 }
                 else

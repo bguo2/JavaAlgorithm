@@ -7,8 +7,8 @@ public class MergeKSortedArray {
     private PriorityQueue<ArrayContainer> queue = new PriorityQueue<>();
 
     private class ArrayContainer implements Comparable<ArrayContainer> {
-        public int[] array;
-        public int curIndex;
+        int[] array;
+        int curIndex;
 
         public ArrayContainer(int[] array, int index) {
             this.array = array;

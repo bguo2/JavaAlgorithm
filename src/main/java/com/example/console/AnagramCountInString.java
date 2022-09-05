@@ -51,6 +51,7 @@ public class AnagramCountInString {
     //Given two strings,  and , that may or may not be of the same length, determine the minimum number of character deletions
     // required to make  and  anagrams. Any characters can be deleted from either of the strings.
     // for Anangram, the position doesn't matter: so the 2 length - commons*2
+    //the shared characters can construct anagrams, so the min to delete is length - shared chars' length
     public static int makeAnagram(String a, String b) {
         Map<Character, Integer> map1 = new HashMap<>();
         Map<Character, Integer> map2 = new HashMap<>();

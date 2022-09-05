@@ -1,6 +1,8 @@
 package com.example.console;
 
 import com.example.console.graph.ComponentCycle;
+import com.example.console.palimdrome.PalindromePair;
+import com.example.console.palimdrome.PalindromeWith3Digits;
 import com.example.console.subarray.MaxSubArray;
 import org.junit.Test;
 import org.junit.runner.RunWith;

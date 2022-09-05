@@ -40,7 +40,6 @@ public class Iterator1<E> {
         if(nextElement != null)
         {
             tmp = nextElement;
-            nextElement = null;
         }
 
         return tmp;

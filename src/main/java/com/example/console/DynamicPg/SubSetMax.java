@@ -21,7 +21,7 @@ public class SubSetMax {
             //choose the max of dp[i-1] and curSum
             dp[i] = Math.max(dp[i-1], curSum);
         }
-        return dp[arr.length-1];
+        return dp[arr.length-1] < 0 ? 0 : dp[arr.length-1];
     }
 
     //You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed.
@@ -66,7 +66,7 @@ public class SubSetMax {
         dp[i]=nums[i];
         dp[i+1]=Math.max(nums[i+1], dp[i]);
 
-        for(int k=i+2; k<=j; k++){
+        for(int k=i+2; k<=j; k++) {
             dp[k]=Math.max(dp[k-1], dp[k-2]+nums[k]);
         }
 

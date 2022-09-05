@@ -4,7 +4,6 @@ import com.example.console.DynamicPg.PalidromSubStrings;
 import com.example.console.DynamicPg.Triplets;
 import com.example.console.binarytree.BinaryTreePathSum;
 import com.example.console.math.NthRoot;
-import com.example.console.matrix.GridIllumination;
 import com.example.console.matrix.Matrix;
 import com.example.console.subarray.*;
 import org.junit.Assert;
@@ -14,8 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -112,21 +109,6 @@ public class AppTest8 {
         int[] nums = new int[] { 4, 3, 2, 3, 5, 2, 1 };
         boolean result = KEqualSubSets.canPartitionKSubsets(nums, 2);
         Assert.assertTrue(result);
-    }
-
-    @Test
-    public void gridIlluminationTest() {
-        GridIllumination test = new GridIllumination();
-        int[][] lamps = new int[][] {
-                {0, 0},
-                {0, 4},
-        };
-        int[][] query = new int[][] {
-                {0, 4},
-                {0, 1},
-                {1, 4}
-        };
-        int[] result = test.gridIllumination(5, lamps, query);
     }
 
     @Test
