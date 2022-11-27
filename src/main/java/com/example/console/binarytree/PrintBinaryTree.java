@@ -123,7 +123,7 @@ public class BinaryTreeLinked {
     }
 
 //print out binary tree
-//      1
+//       1
 //      /\
 //     2  3
 //    /\   \
